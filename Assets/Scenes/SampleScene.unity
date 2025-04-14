@@ -237,10 +237,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnedBlockParent: {fileID: 689382744}
-  blockPrefab: {fileID: 1227746656287619492, guid: 8392937ef25048f498b4185ea3672b8b, type: 3}
-  gridSizeX: 5
-  gridSizeY: 5
-  allBlockObj: []
+  tilePrefabs:
+  - {fileID: 7033106004551880711, guid: 90b5b187d9410fd489e278c880472af7, type: 3}
+  - {fileID: 1227746656287619492, guid: 8392937ef25048f498b4185ea3672b8b, type: 3}
+  - {fileID: 4000774589361315726, guid: 6030300ad88fa1c489f0cf840d5d2de6, type: 3}
+  - {fileID: 2807244820769274104, guid: b6b94ea46606cb942a8c9b95a5f9a6e6, type: 3}
+  - {fileID: 6216620696578221185, guid: a7045f40a98b8ea4191fd4a6e20f6fee, type: 3}
+  - {fileID: 891441037997670768, guid: 5b9e3baeda207594c8b42ac7e7d66c6b, type: 3}
+  - {fileID: 3796306760088627780, guid: 9e88c5582dc1d4b499557b0d08f44dd4, type: 3}
+  PlayerPrefab: {fileID: 7264672337269417286, guid: 690942c2eba82d14fb625fb5592f78fd, type: 3}
+  levelName: Level1
 --- !u!4 &689382744
 Transform:
   m_ObjectHideFlags: 0
@@ -256,6 +262,52 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1227984612
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1227984613}
+  - component: {fileID: 1227984614}
+  m_Layer: 0
+  m_Name: InputHandle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1227984613
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1227984612}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 4.506871, y: 0.04221057, z: 0.020164497}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1227984614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1227984612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39833241f02312a449d506035d4c62ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  swipeThreshold: 50
+  direction: {x: 0, y: 0}
 --- !u!1001 &224189005260341214
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -264,16 +316,40 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 224189004460738960, guid: 3f061116419f13b4c9e41bd29fd5e5b1, type: 3}
+      propertyPath: cols
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 224189004460738960, guid: 3f061116419f13b4c9e41bd29fd5e5b1, type: 3}
+      propertyPath: cellSize
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 224189004460738960, guid: 3f061116419f13b4c9e41bd29fd5e5b1, type: 3}
       propertyPath: fileName
       value: Level1
       objectReference: {fileID: 0}
     - target: {fileID: 224189004460738960, guid: 3f061116419f13b4c9e41bd29fd5e5b1, type: 3}
       propertyPath: currentColorIndex
-      value: 3
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224189004460738960, guid: 3f061116419f13b4c9e41bd29fd5e5b1, type: 3}
+      propertyPath: colors.Array.data[3].b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224189004460738960, guid: 3f061116419f13b4c9e41bd29fd5e5b1, type: 3}
+      propertyPath: colors.Array.data[3].g
+      value: 0.6326043
+      objectReference: {fileID: 0}
+    - target: {fileID: 224189004460738960, guid: 3f061116419f13b4c9e41bd29fd5e5b1, type: 3}
+      propertyPath: colors.Array.data[3].r
+      value: 0.8962264
       objectReference: {fileID: 0}
     - target: {fileID: 224189004460738962, guid: 3f061116419f13b4c9e41bd29fd5e5b1, type: 3}
       propertyPath: m_Name
       value: MapCreateJson
+      objectReference: {fileID: 0}
+    - target: {fileID: 224189004460738962, guid: 3f061116419f13b4c9e41bd29fd5e5b1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224189004460738963, guid: 3f061116419f13b4c9e41bd29fd5e5b1, type: 3}
       propertyPath: m_RootOrder

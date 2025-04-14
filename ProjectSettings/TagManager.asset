@@ -13,11 +13,11 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - EmptyTitle
+  - WallTitle
+  - TrapTitle
+  - Player
+  - Enemy
   - 
   - 
   - 
@@ -40,4 +40,19 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: EmptyTitle
+    uniqueID: 2300998741
+    locked: 0
+  - name: WallTitle
+    uniqueID: 3819502601
+    locked: 0
+  - name: TrapTitle
+    uniqueID: 1384892551
+    locked: 0
+  - name: Player
+    uniqueID: 335909393
+    locked: 0
+  - name: Enemy
+    uniqueID: 4275033019
     locked: 0

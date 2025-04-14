@@ -2,19 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum BlockType
+public enum BlockTitleMap
 {
-    start,
-    wall,
-    enemy,
-    fire,
-    hammer,
-    end
+    empty = 0,
+    wall = 1,
+    start = 2,
+    enemyPos = 3,
+    firePos = 4,
+    hammerPos = 5,
+    end = 6
 }
 
-public class Block : MonoBehaviour
-{
-    public BlockType blocktype;
-    public Vector2 gridIndex;
-
-}
