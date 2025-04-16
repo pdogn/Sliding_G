@@ -8,6 +8,8 @@ using UnityEngine;
 
 public class MapCreateJson : MonoBehaviour
 {
+    [Header("Camera Settings")]
+    [SerializeField] Camera _camera;
     [Header("Grid Settings")]
     public string fileName = "gridData";
     public int rows = 10;
@@ -46,6 +48,7 @@ public class MapCreateJson : MonoBehaviour
     }
     private void Start()
     {
+        _camera = GameObject.FindObjectOfType<Camera>();
         gridData = new int[rows, cols];
     }
 
@@ -142,6 +145,7 @@ public class MapCreateJson : MonoBehaviour
         public List<int> data = new List<int>();
         public int rows;
         public int cols;
+        public float _cameraSize;
     }
 
     public void SaveToJson()
@@ -149,6 +153,8 @@ public class MapCreateJson : MonoBehaviour
         GridSaveData saveData = new GridSaveData();
         saveData.rows = rows;
         saveData.cols = cols;
+        float camSize = _camera.orthographicSize;
+        saveData._cameraSize = camSize;
 
         for (int y = 0; y < rows; y++)
             for (int x = 0; x < cols; x++)
@@ -161,24 +167,46 @@ public class MapCreateJson : MonoBehaviour
 
     public void LoadFromJson()
     {
-        if (File.Exists(saveFilePath))
+        //if (File.Exists(saveFilePath))
+        //{
+        //    string json = File.ReadAllText(saveFilePath);
+        //    GridSaveData saveData = JsonUtility.FromJson<GridSaveData>(json);
+
+        //    rows = saveData.rows;
+        //    cols = saveData.cols;
+        //    gridData = new int[rows, cols];
+
+        //    for (int i = 0; i < saveData.data.Count; i++)
+        //    {
+        //        int y = i / cols;
+        //        int x = i % cols;
+        //        gridData[y, x] = saveData.data[i];
+        //    }
+
+        //    Debug.Log("Grid loaded from: " + saveFilePath);
+        //}
+        string path = $"LevelJsons/{fileName}";
+        TextAsset levelJson = Resources.Load<TextAsset>(path);
+
+        if (levelJson == null)
         {
-            string json = File.ReadAllText(saveFilePath);
-            GridSaveData saveData = JsonUtility.FromJson<GridSaveData>(json);
-
-            rows = saveData.rows;
-            cols = saveData.cols;
-            gridData = new int[rows, cols];
-
-            for (int i = 0; i < saveData.data.Count; i++)
-            {
-                int y = i / cols;
-                int x = i % cols;
-                gridData[y, x] = saveData.data[i];
-            }
-
-            Debug.Log("Grid loaded from: " + saveFilePath);
+            Debug.LogError($"Không tìm thấy file: {path}");
+            return;
         }
+        GridSaveData saveData = JsonUtility.FromJson<GridSaveData> (levelJson.text);
+        rows = saveData.rows;
+        cols = saveData.cols;
+        float camSize = saveData._cameraSize;
+        _camera.orthographicSize = camSize;
+        gridData = new int[rows, cols];
+        for (int i = 0; i < saveData.data.Count; i++)
+        {
+            int y = i / cols;
+            int x = i % cols;
+            gridData[y, x] = saveData.data[i];
+        }
+
+        Debug.Log("Grid loaded from: " + path);
     }
 }
 

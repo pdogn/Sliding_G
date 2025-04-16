@@ -3,11 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[Serializable]
-public class GameObj2DArray
-{
-    public GameObject[] rows = new GameObject[1];
-}
+//[Serializable]
+//public class GameObj2DArray
+//{
+//    public GameObject[] rows = new GameObject[1];
+//}
 
 [System.Serializable]
 public class LevelData
@@ -15,10 +15,13 @@ public class LevelData
     public int[] data;
     public int rows;
     public int cols;
+    public float _cameraSize;
 }
 
 public class GridManager : Singleton<GridManager>
 {
+    [SerializeField] Camera cam;
+
     [SerializeField]
     Transform spawnedBlockParent;
 
@@ -39,7 +42,12 @@ public class GridManager : Singleton<GridManager>
     public int GridSizeX { get; private set; }
     public int GridSizeY { get; private set; }
 
-public string levelName = "Level5";
+    public string levelName = "Level5";
+
+    private void Awake()
+    {
+        cam = GameObject.FindObjectOfType<Camera>();
+    }
     private void Start()
     {
         //SpawnObj();
@@ -101,8 +109,14 @@ public string levelName = "Level5";
         LevelData level = JsonUtility.FromJson<LevelData>(levelJson.text);
         GridSizeX = level.cols;
         GridSizeY = level.rows;
+        Debug.LogError(level._cameraSize + "lll");
+        cam.orthographicSize = level._cameraSize;
+
         grid = new int[level.rows, level.cols];
         allBlockObj = new GameObject[level.rows, level.cols];
+
+        Vector2 startPos = new Vector2(-((GridSizeX * tileSize) / 2) + (tileSize / 2), ((GridSizeY * tileSize) / 2) - (tileSize / 2));
+
         for (int i = 0; i < level.rows; i++)
         {
             for (int j = 0; j < level.cols; j++)
@@ -115,7 +129,7 @@ public string levelName = "Level5";
 
                 if (tileType >= 0 && tileType < tilePrefabs.Length && tilePrefabs[tileType] != null)
                 {
-                    Vector3 spawnPos = new Vector3(j * tileSize, -i * tileSize, 0); // -i để vẽ từ trên xuống
+                    Vector3 spawnPos = new Vector3(startPos.x + j * tileSize, startPos.y - i * tileSize, 0);
                     GameObject titleObj = Instantiate(tilePrefabs[tileType], spawnPos, Quaternion.identity, spawnedBlockParent);
                     allBlockObj[i, j] = titleObj;
 
