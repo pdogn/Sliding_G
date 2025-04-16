@@ -9,6 +9,16 @@ public class UIManager : MonoBehaviour
     public GameObject UIMain_canvas;
     public GameObject UISelectLevel_canvas;
 
+    [Space(10)]
+    [Header("Main_canvas")]
+    [SerializeField] Button Play_btn;
+    [SerializeField] Button Setting;
+    [SerializeField] Button Description;
+    [SerializeField] Button Facebok;
+    [SerializeField] Button RemoveAds;
+
+    [Space(10)]
+    [Header("SelectLevel_canvas")]
     [SerializeField] Transform content;
     [SerializeField] List<Button> buttons;
 
@@ -16,6 +26,13 @@ public class UIManager : MonoBehaviour
     void Start()
     {
         StartUI();
+
+        Play_btn.onClick.AddListener(PlayGameBtn);
+        Setting.onClick.AddListener(SettingBtn);
+        Description.onClick.AddListener(DesBtn);
+        Facebok.onClick.AddListener(FaebokBtn);
+        RemoveAds.onClick.AddListener(NotAdsBtn);
+
         LoadButtonsLevel();
     }
 
@@ -40,6 +57,29 @@ public class UIManager : MonoBehaviour
         {
             buttons[i].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = $"Level {i + 1}";
         }
+    }
+
+    void PlayGameBtn()
+    {
+        UIMain_canvas.SetActive(false);
+        UISelectLevel_canvas.SetActive(true);
+    }
+
+    void SettingBtn()
+    {
+        
+    }
+    void DesBtn()
+    {
+        
+    }
+    void FaebokBtn()
+    {
+        
+    }
+    void NotAdsBtn()
+    {
+        
     }
 
 }
