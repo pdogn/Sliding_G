@@ -8041,6 +8041,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UIMain_canvas: {fileID: 531742695}
   UISelectLevel_canvas: {fileID: 1771756324}
+  content: {fileID: 1203168294}
+  buttons: []
 --- !u!1 &1717241665
 GameObject:
   m_ObjectHideFlags: 0
