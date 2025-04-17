@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIManager : MonoBehaviour
+public class UIManager : Singleton<UIManager>
 {
     public GameObject UIMain_canvas;
     public GameObject UISelectLevel_canvas;
@@ -27,9 +27,11 @@ public class UIManager : MonoBehaviour
     Sprite Img_LevelPress;
     Sprite Img_LevelLocked;
 
+    LevelManager levelManager;
+
     private void Awake()
     {
-        //int unlockedLevel = PlayerPrefs.GetInt("UnlockedLevel", 1);
+        levelManager = FindObjectOfType<LevelManager>();
     }
 
     // Start is called before the first frame update
@@ -66,17 +68,21 @@ public class UIManager : MonoBehaviour
             }
         }
 
+        levelManager.LoadLevelInfo();
         int unlockedLevel = PlayerPrefs.GetInt("UnlockedLevel", 1);
 
         for (int i=0; i< buttons.Count; i++)
         {
-            buttons[i].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = $"{i + 1}";
+            buttons[i].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = levelManager.GetLevelName(i); //$"{i + 1}";
 
             if (i < unlockedLevel)
             {
                 buttons[i].GetComponent<Image>().sprite = Img_LevelPress;
                 buttons[i].interactable = true;
                 buttons[i].transform.GetChild(0).gameObject.SetActive(true);
+
+                int index = i;
+                buttons[i].onClick.AddListener(() => Event_PlayLevel(index));
             }
             else
             {
@@ -87,11 +93,24 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    public int GetButtonsCount()
+    {
+        return buttons.Count;
+    }
+
 
     void PlayGameBtn()
     {
         UIMain_canvas.SetActive(false);
         UISelectLevel_canvas.SetActive(true);
+    }
+
+    void Event_PlayLevel(int levelId)
+    {
+        UISelectLevel_canvas.SetActive(false);
+        Debug.Log("Load level  " +  levelId);
+        string levelPath = levelManager.GetPath(levelId);
+        GridManager.Instance.LoadLevel(levelPath);
     }
 
     void SettingBtn()

@@ -51,7 +51,7 @@ public class GridManager : Singleton<GridManager>
     private void Start()
     {
         //SpawnObj();
-        LoadLevel(levelName);
+        //LoadLevel(levelName);
     }
 
     //private void SpawnObj()
@@ -87,7 +87,7 @@ public class GridManager : Singleton<GridManager>
     //    }
     //}
 
-    private void LoadLevel(string name)
+    public void LoadLevel(string name)
     {
         if (spawnedBlockParent.childCount > 0)
         {
@@ -109,7 +109,7 @@ public class GridManager : Singleton<GridManager>
         LevelData level = JsonUtility.FromJson<LevelData>(levelJson.text);
         GridSizeX = level.cols;
         GridSizeY = level.rows;
-        Debug.LogError(level._cameraSize + "lll");
+        Debug.Log("Camera size: " + level._cameraSize);
         cam.orthographicSize = level._cameraSize;
 
         grid = new int[level.rows, level.cols];
