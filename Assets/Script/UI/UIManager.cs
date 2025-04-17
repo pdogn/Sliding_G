@@ -22,10 +22,23 @@ public class UIManager : MonoBehaviour
     [SerializeField] Transform content;
     [SerializeField] List<Button> buttons;
 
+    private const string Img_LevelPressPath = "Images/lvl_block_pressed";
+    private const string Img_LevelLockedPath = "Images/lvl_lok1";
+    Sprite Img_LevelPress;
+    Sprite Img_LevelLocked;
+
+    private void Awake()
+    {
+        //int unlockedLevel = PlayerPrefs.GetInt("UnlockedLevel", 1);
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         StartUI();
+
+        Img_LevelPress = Resources.Load<Sprite>(Img_LevelPressPath);
+        Img_LevelLocked = Resources.Load<Sprite>(Img_LevelLockedPath);
 
         Play_btn.onClick.AddListener(PlayGameBtn);
         Setting.onClick.AddListener(SettingBtn);
@@ -33,7 +46,7 @@ public class UIManager : MonoBehaviour
         Facebok.onClick.AddListener(FaebokBtn);
         RemoveAds.onClick.AddListener(NotAdsBtn);
 
-        LoadButtonsLevel();
+        Load_UI_SelectLevel();
     }
 
     void StartUI()
@@ -42,9 +55,9 @@ public class UIManager : MonoBehaviour
         UISelectLevel_canvas.SetActive(false);
     }
 
-    void LoadButtonsLevel()
+    void Load_UI_SelectLevel()
     {
-        foreach(Transform item in content)
+        foreach (Transform item in content)
         {
             Button[] btns = item.GetComponentsInChildren<Button>(true);
             foreach (Button btn in btns)
@@ -53,11 +66,27 @@ public class UIManager : MonoBehaviour
             }
         }
 
-        for(int i=0; i< buttons.Count; i++)
+        int unlockedLevel = PlayerPrefs.GetInt("UnlockedLevel", 1);
+
+        for (int i=0; i< buttons.Count; i++)
         {
-            buttons[i].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = $"Level {i + 1}";
+            buttons[i].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = $"{i + 1}";
+
+            if (i < unlockedLevel)
+            {
+                buttons[i].GetComponent<Image>().sprite = Img_LevelPress;
+                buttons[i].interactable = true;
+                buttons[i].transform.GetChild(0).gameObject.SetActive(true);
+            }
+            else
+            {
+                buttons[i].GetComponent<Image>().sprite = Img_LevelLocked;
+                buttons[i].interactable = false;
+                buttons[i].transform.GetChild(0).gameObject.SetActive(false);
+            }
         }
     }
+
 
     void PlayGameBtn()
     {
