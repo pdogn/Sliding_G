@@ -19,8 +19,15 @@ public class UIManager : Singleton<UIManager>
 
     [Space(10)]
     [Header("SelectLevel_canvas")]
+    [SerializeField] Button btn_backMainCanvas;
+    [SerializeField] Button btn_PlayNewLevel;
+    [SerializeField] Button btn_Shop;
     [SerializeField] Transform content;
     [SerializeField] List<Button> buttons;
+    public int GetButtonsCount()
+    {
+        return buttons.Count;
+    }
 
     private const string Img_LevelPressPath = "Images/lvl_block_pressed";
     private const string Img_LevelLockedPath = "Images/lvl_lok1";
@@ -41,17 +48,27 @@ public class UIManager : Singleton<UIManager>
 
         Img_LevelPress = Resources.Load<Sprite>(Img_LevelPressPath);
         Img_LevelLocked = Resources.Load<Sprite>(Img_LevelLockedPath);
-
+        //Main_canvas
         Play_btn.onClick.AddListener(PlayGameBtn);
         Setting.onClick.AddListener(SettingBtn);
         Description.onClick.AddListener(DesBtn);
         Facebok.onClick.AddListener(FaebokBtn);
         RemoveAds.onClick.AddListener(NotAdsBtn);
 
+        //SelectLevel_canvas
+        btn_backMainCanvas.onClick.AddListener(BackMain_canvas);
+        btn_PlayNewLevel.onClick.AddListener(Play_New_Level);
+        btn_Shop.onClick.AddListener(OpenShop);
+
         Load_UI_SelectLevel();
     }
 
     void StartUI()
+    {
+        BackMain_canvas();
+    }
+
+    void BackMain_canvas()
     {
         UIMain_canvas.SetActive(true);
         UISelectLevel_canvas.SetActive(false);
@@ -69,6 +86,7 @@ public class UIManager : Singleton<UIManager>
         }
 
         levelManager.LoadLevelInfo();
+
         int unlockedLevel = PlayerPrefs.GetInt("UnlockedLevel", 1);
 
         for (int i=0; i< buttons.Count; i++)
@@ -92,12 +110,6 @@ public class UIManager : Singleton<UIManager>
             }
         }
     }
-
-    public int GetButtonsCount()
-    {
-        return buttons.Count;
-    }
-
 
     void PlayGameBtn()
     {
@@ -130,4 +142,15 @@ public class UIManager : Singleton<UIManager>
         
     }
 
+    void OpenShop()
+    {
+
+    }
+
+    void Play_New_Level()
+    {
+        int unlockedLevel = PlayerPrefs.GetInt("UnlockedLevel", 1);
+        int LevelId = unlockedLevel - 1;
+        Event_PlayLevel(LevelId);
+    }
 }

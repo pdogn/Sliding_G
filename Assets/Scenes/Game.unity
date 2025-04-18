@@ -9374,6 +9374,9 @@ MonoBehaviour:
   Description: {fileID: 870039596}
   Facebok: {fileID: 1860076464}
   RemoveAds: {fileID: 303725286}
+  btn_backMainCanvas: {fileID: 1391879597}
+  btn_PlayNewLevel: {fileID: 608251112}
+  btn_Shop: {fileID: 1472960842}
   content: {fileID: 1203168294}
   buttons: []
 --- !u!1 &1726006715
