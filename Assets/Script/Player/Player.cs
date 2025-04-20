@@ -59,7 +59,8 @@ public class Player : MonoBehaviour
         {
             if (y + 1 < GridManager.Instance.GridSizeX && GridManager.Instance.allBlockObj[x, y+1] != null)
             {
-                if(GridManager.Instance.grid[x, y + 1] == 0 || GridManager.Instance.grid[x, y + 1] == 2 || GridManager.Instance.grid[x, y + 1] == 3 || GridManager.Instance.grid[x, y + 1] == 6)
+                int value = GridManager.Instance.grid[x, y + 1];
+                if (value == 0 || value == 2 || value == 3 || value == 6 || value == 7)
                 {
                     target = new Vector2(x, y + 1);
                     FindTarget(direction, new Vector2(x, y + 1));
@@ -70,7 +71,8 @@ public class Player : MonoBehaviour
         {
             if (y - 1 < GridManager.Instance.GridSizeX && GridManager.Instance.allBlockObj[x, y - 1] != null)
             {
-                if (GridManager.Instance.grid[x, y - 1] == 0 || GridManager.Instance.grid[x, y - 1] == 2 || GridManager.Instance.grid[x, y - 1] == 3 || GridManager.Instance.grid[x, y - 1] == 6)
+                int value = GridManager.Instance.grid[x, y - 1];
+                if (value == 0 || value == 2 || value == 3 || value == 6 || value == 7)
                 {
                     target = new Vector2(x, y - 1);
                     FindTarget(direction, new Vector2(x, y - 1));
@@ -81,7 +83,8 @@ public class Player : MonoBehaviour
         {
             if (x + 1 < GridManager.Instance.GridSizeY && GridManager.Instance.allBlockObj[x+1, y] != null)
             {
-                if (GridManager.Instance.grid[x + 1, y] == 0 || GridManager.Instance.grid[x + 1, y] == 2 || GridManager.Instance.grid[x + 1, y] == 3 || GridManager.Instance.grid[x + 1, y] == 6)
+                int value = GridManager.Instance.grid[x + 1, y];
+                if (value == 0 || value == 2 || value == 3 || value == 6 || value == 7)
                 {
                     target = new Vector2(x + 1, y);
                     FindTarget(direction, new Vector2(x + 1, y));
@@ -92,7 +95,8 @@ public class Player : MonoBehaviour
         {
             if (x - 1 < GridManager.Instance.GridSizeY && GridManager.Instance.allBlockObj[x - 1, y] != null)
             {
-                if (GridManager.Instance.grid[x - 1, y] == 0 || GridManager.Instance.grid[x - 1, y] == 2 || GridManager.Instance.grid[x - 1, y] == 3 || GridManager.Instance.grid[x - 1, y] == 6)
+                int value = GridManager.Instance.grid[x - 1, y];
+                if (value == 0 || value == 2 || value == 3 || value == 6 || value == 7)
                 {
                     target = new Vector2(x - 1, y);
                     FindTarget(direction, new Vector2(x - 1, y));

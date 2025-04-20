@@ -44,7 +44,7 @@ public class GridManager : Singleton<GridManager>
 
     public string levelName = "Level5";
 
-    private void Awake()
+    protected override void Awake()
     {
         cam = GameObject.FindObjectOfType<Camera>();
     }

@@ -22,7 +22,7 @@ public class LevelManager : MonoBehaviour
 
     public void LoadLevelInfo()
     {
-        int levelsCount = UIManager.Instance.GetButtonsCount();
+        int levelsCount = SelectLevel_Canvas.Instance.GetButtonsCount();
         levels = new Level[levelsCount];
         for (int i = 0; i < levelsCount; i++)
         {

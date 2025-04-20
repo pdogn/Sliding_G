@@ -24,17 +24,18 @@ public class MapCreateJson : MonoBehaviour
     private bool isPanning = false;
 
     [Header("Color Settings")]
-    public Color[] colors = new Color[6]
+    public Color[] colors = new Color[7]
     {
         Color.red,
-        Color.green,
+        Color.gray,
         Color.blue,
         Color.yellow,
         Color.magenta,
-        Color.cyan
+        Color.cyan,
+        Color.green
     };
 
-    [Range(1, 6)]
+    [Range(1, 7)]
     public int currentColorIndex = 1;
 
     [HideInInspector]
@@ -130,7 +131,7 @@ public class MapCreateJson : MonoBehaviour
                 Gizmos.DrawWireCube(pos + Vector3.one * cellSize * 0.5f, Vector3.one * cellSize);
 
                 int value = gridData[y, x];
-                if (value >= 1 && value <= 6)
+                if (value >= 1 && value <= 7)
                 {
                     Gizmos.color = colors[value - 1];
                     Gizmos.DrawCube(pos + Vector3.one * cellSize * 0.5f, Vector3.one * cellSize * 0.9f);
@@ -223,7 +224,7 @@ public class GridPainterEditor : Editor
         GUILayout.Space(10);
         GUILayout.Label("Grid Painter Controls", EditorStyles.boldLabel);
 
-        gridPainter.currentColorIndex = EditorGUILayout.IntSlider("Current Color (1–6)", gridPainter.currentColorIndex, 1, 6);
+        gridPainter.currentColorIndex = EditorGUILayout.IntSlider("Current Color (1–7)", gridPainter.currentColorIndex, 1, 7);
 
         GUI.backgroundColor = gridPainter.colors[0];
         if (GUILayout.Button("wall", GUILayout.Width(100), GUILayout.Height(30)))
@@ -254,6 +255,11 @@ public class GridPainterEditor : Editor
         if (GUILayout.Button("end", GUILayout.Width(100), GUILayout.Height(30)))
         {
             gridPainter.currentColorIndex = 6;
+        }
+        GUI.backgroundColor = gridPainter.colors[6];
+        if (GUILayout.Button("coin", GUILayout.Width(100), GUILayout.Height(30)))
+        {
+            gridPainter.currentColorIndex = 7;
         }
 
         GUI.backgroundColor = Color.white;
