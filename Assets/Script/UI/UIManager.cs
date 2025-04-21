@@ -8,7 +8,7 @@ public class UIManager : Singleton<UIManager>
 {
     public GameObject UIMain_canvas;
     public GameObject UISelectLevel_canvas;
-
+    public GameObject UI_Ingame;
 
     // Start is called before the first frame update
     void Start()
@@ -25,13 +25,21 @@ public class UIManager : Singleton<UIManager>
     {
         UIMain_canvas.SetActive(true);
         UISelectLevel_canvas.SetActive(false);
+        UI_Ingame.SetActive(false);
         SetupBackground(588f);
     }
 
-    public void PlayGameBtn()
+    public void DisplaySelected_canvas()
     {
         UIMain_canvas.SetActive(false);
         UISelectLevel_canvas.SetActive(true);
+        UI_Ingame.SetActive(false);
+    }
+
+    public void PlayIngameUI()
+    {
+        UISelectLevel_canvas.SetActive(false);
+        UI_Ingame.SetActive(true);
     }
 
     public void SetupBackground(float posX)

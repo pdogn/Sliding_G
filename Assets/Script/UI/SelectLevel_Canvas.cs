@@ -88,8 +88,8 @@ public class SelectLevel_Canvas : Singleton<SelectLevel_Canvas>
         Debug.Log("Load level  " + levelId);
         string levelPath = levelManager.GetPath(levelId);
         GridManager.Instance.LoadLevel(levelPath);
-        this.gameObject.SetActive(false);
         UIManager.Instance.SetupBackground(-455f);
+        UIManager.Instance.PlayIngameUI();
     }
     void Play_New_Level()
     {

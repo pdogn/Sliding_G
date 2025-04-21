@@ -5,12 +5,17 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    [SerializeField] Vector2 currentIndex;
     [SerializeField] Vector2 target;     //(rows, cols)
+    [SerializeField] float timeMoveToNextblock = 0.1f;
+
+    public int gainedCoins;
 
     // Start is called before the first frame update
     void Start()
     {
         InputHandle.Instance.OnSwipe += OnSwipeDetected;
+        gainedCoins = 0;
     }
 
     // Update is called once per frame
@@ -24,22 +29,23 @@ public class Player : MonoBehaviour
         if (direction == Vector2.right)
         {
             FindTarget(direction, target);
-            MoveToTarget(.1f);
+            MoveToTarget(target, CaculateTimeToMove());
         }
         else if (direction == Vector2.left)
         {
             FindTarget(direction, target);
-            MoveToTarget(.1f);
+            MoveToTarget(target, CaculateTimeToMove());
         }
         else if (direction == Vector2.up)
         {
             FindTarget(direction, target);
-            MoveToTarget(.1f);
+
+            MoveToTarget(target, CaculateTimeToMove());
         }
         else if (direction == Vector2.down)
         {
             FindTarget(direction, target);
-            MoveToTarget(.1f);
+            MoveToTarget(target, CaculateTimeToMove());
         }
     }
 
@@ -105,19 +111,52 @@ public class Player : MonoBehaviour
         }
     }
 
-    void MoveToTarget(float arriveTime)
+    float CaculateTimeToMove()
     {
+        if(currentIndex == target) return 0;
+
+        float _timeToMove = timeMoveToNextblock;
+        int distanceX = (int)Mathf.Abs(target.x - currentIndex.x);
+        int distanceY = (int)Mathf.Abs(target.y - currentIndex.y);
+        if(distanceX > 0)
+        {
+            _timeToMove = timeMoveToNextblock * distanceX;
+        }
+        if(distanceY > 0)
+        {
+            _timeToMove = timeMoveToNextblock * distanceY;
+        }
+        return _timeToMove;
+    }
+
+    void MoveToTarget(Vector2 _targetIndex, float arriveTime)
+    {
+        arriveTime = CaculateTimeToMove();
+        Debug.Log("Dong: arriveTime: " + arriveTime);
+
         DOTween.Kill(transform);
         transform.DOKill();
-        Transform targetObj = GridManager.Instance.allBlockObj[(int)target.x, (int)target.y].transform;
+        Transform targetObj = GridManager.Instance.allBlockObj[(int)_targetIndex.x, (int)_targetIndex.y].transform;
         transform.DOMove(targetObj.position, arriveTime).SetEase(Ease.Linear).OnComplete(() =>
         {
-
+            GameManager.Instance.Coins = gainedCoins;
+            currentIndex = _targetIndex;
         });
     }
 
     public void SetPlayer(Vector2 _target)
     {
         target = _target;
+        currentIndex = target;
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("coin"))
+        {
+            collision.gameObject.SetActive(false);
+            gainedCoins += 1;
+        }
+    }
+
 }
