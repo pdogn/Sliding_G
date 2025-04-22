@@ -68,7 +68,7 @@ public class SelectLevel_Canvas : Singleton<SelectLevel_Canvas>
                 buttons[i].transform.GetChild(0).gameObject.SetActive(true);
 
                 int index = i;
-                buttons[i].onClick.AddListener(() => Event_PlayLevel(index));
+                buttons[i].onClick.AddListener(() => Event_PlayLevel(index+1));
             }
             else
             {
@@ -86,15 +86,15 @@ public class SelectLevel_Canvas : Singleton<SelectLevel_Canvas>
     void Event_PlayLevel(int levelId)
     {
         Debug.Log("Load level  " + levelId);
-        string levelPath = levelManager.GetPath(levelId);
-        GridManager.Instance.LoadLevel(levelPath);
+        //string levelPath = levelManager.GetPath(levelId);
+        GridManager.Instance.LoadLevel(levelId);
         UIManager.Instance.SetupBackground(-455f);
         UIManager.Instance.PlayIngameUI();
     }
     void Play_New_Level()
     {
         int unlockedLevel = PlayerPrefs.GetInt("UnlockedLevel", 1);
-        int LevelId = unlockedLevel - 1;
+        int LevelId = unlockedLevel;
         Event_PlayLevel(LevelId);
     }
 

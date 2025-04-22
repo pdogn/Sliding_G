@@ -16,6 +16,7 @@ public class InputHandle : Singleton<InputHandle>
     public bool IsSwiping => isSwiping;
 
     public Vector2 direction;
+
     void Update()
     {
 #if UNITY_EDITOR

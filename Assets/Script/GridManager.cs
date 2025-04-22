@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 //[Serializable]
@@ -42,7 +43,8 @@ public class GridManager : Singleton<GridManager>
     public int GridSizeX { get; private set; }
     public int GridSizeY { get; private set; }
 
-    public string levelName = "Level5";
+    public int CurrenlevelIndex;
+    GameObject player;
 
     protected override void Awake()
     {
@@ -87,8 +89,10 @@ public class GridManager : Singleton<GridManager>
     //    }
     //}
 
-    public void LoadLevel(string name)
+    public void LoadLevel(int levelId)
     {
+        CurrenlevelIndex = levelId;
+
         if (spawnedBlockParent.childCount > 0)
         {
             foreach (Transform child in spawnedBlockParent)
@@ -97,19 +101,40 @@ public class GridManager : Singleton<GridManager>
             }
         }
 
-        string path = $"LevelJsons/{name}";
-        TextAsset levelJson = Resources.Load<TextAsset>(path);
+        int unlockedLevel = PlayerPrefs.GetInt("UnlockedLevel", 1);
+        string jsonText = null;
 
-        if (levelJson == null)
+        // Nếu level đã được vượt qua, load từ persistentDataPath
+        if (levelId < unlockedLevel)
         {
-            Debug.LogError($"Không tìm thấy file: {path}");
-            return;
+            string filePath = Path.Combine(Application.persistentDataPath, $"LevelPassed/Level{levelId}.json");
+
+            if (!File.Exists(filePath))
+            {
+                Debug.LogError("Không tìm thấy file: " + filePath);
+                return;
+            }
+
+            jsonText = File.ReadAllText(filePath);
         }
-       
-        LevelData level = JsonUtility.FromJson<LevelData>(levelJson.text);
+        else // Nếu chưa vượt qua, load từ Resources
+        {
+            string resourcePath = $"LevelJsons/Level{levelId}";
+            TextAsset levelJson = Resources.Load<TextAsset>(resourcePath);
+
+            if (levelJson == null)
+            {
+                Debug.LogError("Không tìm thấy file trong Resources: " + resourcePath);
+                return;
+            }
+
+            jsonText = levelJson.text;
+        }
+
+        LevelData level = JsonUtility.FromJson<LevelData>(jsonText);
+
         GridSizeX = level.cols;
         GridSizeY = level.rows;
-        Debug.Log("Camera size: " + level._cameraSize);
         cam.orthographicSize = level._cameraSize;
 
         grid = new int[level.rows, level.cols];
@@ -123,7 +148,6 @@ public class GridManager : Singleton<GridManager>
             {
                 int index = i * level.cols + j;
                 grid[i, j] = level.data[index];
-                Debug.Log($"Tile at ({i},{j}) = {grid[i, j]}");
 
                 int tileType = grid[i, j];
 
@@ -133,18 +157,22 @@ public class GridManager : Singleton<GridManager>
                     GameObject titleObj = Instantiate(tilePrefabs[tileType], spawnPos, Quaternion.identity, spawnedBlockParent);
                     allBlockObj[i, j] = titleObj;
 
-                    if(tileType == (int)BlockTitleMap.empty)
+                    if (tileType == (int)BlockTitleMap.empty)
                     {
                         allBlockObj[i, j].SetActive(false);
                     }
 
-                    if(tileType == (int)BlockTitleMap.start)
+                    if (tileType == (int)BlockTitleMap.start)
                     {
-                        GameObject player = Instantiate(PlayerPrefab, spawnPos, Quaternion.identity);
-                        player.GetComponent<Player>().SetPlayer(new Vector2(i, j));
+                        if (player == null)
+                        {
+                            player = Instantiate(PlayerPrefab, spawnPos, Quaternion.identity);
+                        }
+
+                        player.GetComponent<Player>().SetPlayer(new Vector2(i, j), spawnPos);
                     }
 
-                    if(tileType == (int)BlockTitleMap.enemyPos)
+                    if (tileType == (int)BlockTitleMap.enemyPos)
                     {
                         GameObject enemy = Instantiate(tilePrefabs[tileType], spawnPos, Quaternion.identity);
                         enemy.name = "Enemyyyyy";
@@ -153,7 +181,40 @@ public class GridManager : Singleton<GridManager>
                 }
             }
         }
+
         Debug.Log("Map loaded và tile đã được spawn.");
     }
 
+
+    public void SaveLevel()
+    {
+        LevelData saveData = new LevelData();
+        saveData.rows = grid.GetLength(0);
+        saveData.cols = grid.GetLength(1);
+        saveData._cameraSize = cam.orthographicSize;
+
+        int row = saveData.rows;
+        int col = saveData.cols;
+        int[] flatData = new int[row * col];
+
+        for (int y = 0; y < row; y++)
+        {
+            for (int x = 0; x < col; x++)
+            {
+                flatData[y * col + x] = allBlockObj[y, x].activeInHierarchy ? grid[y, x] : 0;
+            }
+        }
+
+        saveData.data = flatData;
+
+        string saveFolder = Path.Combine(Application.persistentDataPath, "LevelPassed");
+        if (!Directory.Exists(saveFolder))
+        {
+            Directory.CreateDirectory(saveFolder);
+        }
+        string saveFilePath = Path.Combine(saveFolder, $"Level{CurrenlevelIndex}.json");
+        string json = JsonUtility.ToJson(saveData, true);
+        File.WriteAllText(saveFilePath, json);
+        Debug.Log("Grid saved to: " + saveFilePath);
+    }
 }

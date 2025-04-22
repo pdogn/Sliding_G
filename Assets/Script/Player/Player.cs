@@ -8,24 +8,32 @@ public class Player : MonoBehaviour
     [SerializeField] Vector2 currentIndex;
     [SerializeField] Vector2 target;     //(rows, cols)
     [SerializeField] float timeMoveToNextblock = 0.1f;
-
-    public int gainedCoins;
+    bool isMoving;
+    public int receivedCoins;
 
     // Start is called before the first frame update
     void Start()
     {
         InputHandle.Instance.OnSwipe += OnSwipeDetected;
-        gainedCoins = 0;
+        receivedCoins = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            GridManager.Instance.SaveLevel();
+            int unlockedLevel = PlayerPrefs.GetInt("UnlockedLevel", 1);
+            PlayerPrefs.SetInt("UnlockedLevel", unlockedLevel + 1);
+        }
     }
 
     void OnSwipeDetected(Vector2 direction)
     {
+        if (isMoving) return;
+
+        isMoving = true;
         if (direction == Vector2.right)
         {
             FindTarget(direction, target);
@@ -43,7 +51,7 @@ public class Player : MonoBehaviour
             MoveToTarget(target, CaculateTimeToMove());
         }
         else if (direction == Vector2.down)
-        {
+        { 
             FindTarget(direction, target);
             MoveToTarget(target, CaculateTimeToMove());
         }
@@ -139,15 +147,16 @@ public class Player : MonoBehaviour
         Transform targetObj = GridManager.Instance.allBlockObj[(int)_targetIndex.x, (int)_targetIndex.y].transform;
         transform.DOMove(targetObj.position, arriveTime).SetEase(Ease.Linear).OnComplete(() =>
         {
-            GameManager.Instance.Coins = gainedCoins;
+            isMoving = false;
             currentIndex = _targetIndex;
         });
     }
 
-    public void SetPlayer(Vector2 _target)
+    public void SetPlayer(Vector2 _target, Vector3 _position)
     {
         target = _target;
         currentIndex = target;
+        this.transform.position = _position;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -155,8 +164,8 @@ public class Player : MonoBehaviour
         if (collision.CompareTag("coin"))
         {
             collision.gameObject.SetActive(false);
-            gainedCoins += 1;
+            receivedCoins += 1;
+            GameManager.Instance.Coins = receivedCoins;
         }
     }
-
 }

@@ -3,6 +3,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public static class GameEvent
+{
+    public static event Action<int> OnCoinChanged;
+    public static event Action<int> OnStarChanged;
+
+    public static void CoinChanged(int coins)
+    {
+        OnCoinChanged?.Invoke(coins);
+    }
+    public static void StarChanged(int stars)
+    {
+        OnStarChanged?.Invoke(stars);
+    }
+}
+
 public class GameManager : Singleton<GameManager>
 {
     public int Level;
@@ -16,7 +31,8 @@ public class GameManager : Singleton<GameManager>
             if(coins != value)
             {
                 coins = value;
-                OnCoinChanged?.Invoke(coins);
+                //OnCoinChanged?.Invoke(coins);
+                GameEvent.CoinChanged(coins);
             }
         }
     }
@@ -33,13 +49,14 @@ public class GameManager : Singleton<GameManager>
             if(stars != value)
             {
                 stars = value;
-                OnStarChanged?.Invoke(stars);
+                //OnStarChanged?.Invoke(stars);
+                GameEvent.StarChanged(stars);
             }
         }
     }
 
     public int totalStars;
 
-    public event Action<int> OnCoinChanged;
-    public event Action<int> OnStarChanged;
+    //public event Action<int> OnCoinChanged;
+    //public event Action<int> OnStarChanged;
 }

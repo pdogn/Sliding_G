@@ -14,8 +14,8 @@ public class Ui_Ingame : MonoBehaviour
 
     private void OnEnable()
     {
-        GameManager.Instance.OnCoinChanged += UpdateCoinUI;
-        GameManager.Instance.OnStarChanged += UpdateStarUI;
+        GameEvent.OnCoinChanged += UpdateCoinUI;
+        GameEvent.OnStarChanged += UpdateStarUI;
     }
 
     private void Start()
@@ -25,8 +25,8 @@ public class Ui_Ingame : MonoBehaviour
 
     private void OnDisable()
     {
-        GameManager.Instance.OnCoinChanged -= UpdateCoinUI;
-        GameManager.Instance.OnStarChanged -= UpdateStarUI;
+        GameEvent.OnCoinChanged -= UpdateCoinUI;
+        GameEvent.OnStarChanged -= UpdateStarUI;
     }
 
     private void UpdateCoinUI(int newCoins)
