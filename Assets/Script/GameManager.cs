@@ -8,6 +8,8 @@ public static class GameEvent
     public static event Action<int> OnCoinChanged;
     public static event Action<int> OnStarChanged;
 
+    public static event Action OnLoadScreen;
+
     public static void CoinChanged(int coins)
     {
         OnCoinChanged?.Invoke(coins);
@@ -15,6 +17,11 @@ public static class GameEvent
     public static void StarChanged(int stars)
     {
         OnStarChanged?.Invoke(stars);
+    }
+
+    public static void OnLoadScreenUi()
+    {
+        OnLoadScreen?.Invoke();
     }
 }
 
