@@ -13,8 +13,7 @@ public class UIManager : Singleton<UIManager>
     public GameObject UI_Ingame;
     public Image UI_LoadScreenImg;
 
-    public GameObject PassLevel_canvas;
-    public GameObject FailLevel_canvas;
+    public GameObject Pass_Fail_canvas;
 
     //GameObject backgroundImg;
     // Start is called before the first frame update
@@ -95,11 +94,11 @@ public class UIManager : Singleton<UIManager>
 
     public void DisPlayPassLevelCanvas()
     {
-        PassLevel_canvas.SetActive(true);
+        Pass_Fail_canvas.SetActive(true);
     }
 
     public void DisPlayFailLevelCanvas()
     {
-        FailLevel_canvas.SetActive(true);
+        Pass_Fail_canvas.SetActive(true);
     }
 }

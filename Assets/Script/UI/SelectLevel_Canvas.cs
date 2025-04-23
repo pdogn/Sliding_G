@@ -12,6 +12,7 @@ public class SelectLevel_Canvas : Singleton<SelectLevel_Canvas>
     [SerializeField] Button btn_Shop;
     [SerializeField] Transform content;
     [SerializeField] List<Button> buttons;
+
     public int GetButtonsCount()
     {
         return buttons.Count;
@@ -31,6 +32,9 @@ public class SelectLevel_Canvas : Singleton<SelectLevel_Canvas>
 
     void Start()
     {
+        GameEvent.OnReplayLevel += Event_PlayLevel;
+        GameEvent.OnPlayNextLevel += Play_New_Level;
+
         Img_LevelPress = Resources.Load<Sprite>(Img_LevelPressPath);
         Img_LevelLocked = Resources.Load<Sprite>(Img_LevelLockedPath);
 
@@ -40,7 +44,16 @@ public class SelectLevel_Canvas : Singleton<SelectLevel_Canvas>
 
         Load_UI_SelectLevel();
     }
-
+    //private void OnDisable()
+    //{
+    //    //GameEvent.OnReplayLevel -= Event_PlayLevel;
+    //    //GameEvent.OnPlayNextLevel -= Play_New_Level;
+    //}
+    private void OnApplicationQuit()
+    {
+        GameEvent.OnReplayLevel -= Event_PlayLevel;
+        GameEvent.OnPlayNextLevel -= Play_New_Level;
+    }
 
     void Load_UI_SelectLevel()
     {
@@ -87,6 +100,7 @@ public class SelectLevel_Canvas : Singleton<SelectLevel_Canvas>
     void Event_PlayLevel(int levelId)
     {
         Debug.Log("Load level  " + levelId);
+        GameManager.Instance.CurrenLevel = levelId;
         ////string levelPath = levelManager.GetPath(levelId);
         //GridManager.Instance.LoadLevel(levelId);
         //UIManager.Instance.SetupBackground(-455f);

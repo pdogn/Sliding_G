@@ -5,6 +5,8 @@ using UnityEngine;
 
 public static class GameEvent
 {
+    //public static event Action<int> OnLevelChanged;
+
     public static event Action<int> OnCoinChanged;
     public static event Action<int> OnTotalCoinChanged;
 
@@ -16,6 +18,14 @@ public static class GameEvent
 
     public static event Action OnPassLevel;
     public static event Action OnFailLevel;
+
+    public static event Action<int> OnReplayLevel;
+    public static event Action OnPlayNextLevel;
+
+    //public static void LevelChanged(int level)
+    //{
+    //    OnLevelChanged?.Invoke(level);
+    //}
 
     public static void CoinChanged(int coins)
     {
@@ -43,19 +53,40 @@ public static class GameEvent
         OnDisplaySelectLvUI?.Invoke();
     }
 
-    public static void Pass_Level()
+    public static void DisplayPass_LevelUI()
     {
         OnPassLevel?.Invoke();
     }
-    public static void Fail_Level()
+    public static void DisPlayFail_LevelUI()
     {
         OnFailLevel?.Invoke();
+    }
+    public static void ReplayLevel(int lvId)
+    {
+        OnReplayLevel?.Invoke(lvId);
+    }
+    public static void PlayNextLevel()
+    {
+        OnPlayNextLevel?.Invoke();
     }
 }
 
 public class GameManager : Singleton<GameManager>
 {
-    public int Level;
+    [SerializeField] private int level;
+    public int CurrenLevel
+    {
+        get { return level; }
+        set 
+        {
+            if(level != value)
+            {
+                level = value;
+                //GameEvent.LevelChanged(level);
+            }
+        }
+    }
+
     private int coins;
 
     public int Coins

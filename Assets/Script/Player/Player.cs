@@ -167,5 +167,10 @@ public class Player : MonoBehaviour
             receivedCoins += 1;
             GameManager.Instance.Coins = receivedCoins;
         }
+
+        if (collision.CompareTag("Finish"))
+        {
+            GameEvent.DisplayPass_LevelUI();
+        }
     }
 }
