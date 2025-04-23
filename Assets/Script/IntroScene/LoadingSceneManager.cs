@@ -8,7 +8,7 @@ public class LoadingSceneManager : MonoBehaviour
 {
     public static LoadingSceneManager instance;
 
-    public GameObject LoadScene_canvas;
+    public GameObject LoadScenePanel;
     public Slider progressBar;
 
     private void Awake()
@@ -26,7 +26,7 @@ public class LoadingSceneManager : MonoBehaviour
 
     private void Start()
     {
-        LoadScene_canvas.SetActive(true);
+        LoadScenePanel.SetActive(true);
         StartCoroutine(SwitchToSceneAsync(1));
     }
 
@@ -44,6 +44,6 @@ public class LoadingSceneManager : MonoBehaviour
             yield return null;
         }
         yield return new WaitForSeconds(.5f);
-        LoadScene_canvas.SetActive(false);
+        LoadScenePanel.SetActive(false);
     }
 }

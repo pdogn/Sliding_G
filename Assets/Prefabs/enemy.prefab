@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 940682084460411294}
   - component: {fileID: 4511901527267805083}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -71,8 +71,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -19934277
-  m_SortingLayer: 5
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
@@ -95,7 +95,7 @@ GameObject:
   m_Component:
   - component: {fileID: 456907679239436179}
   - component: {fileID: 5349879662344973594}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -155,8 +155,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -19934277
-  m_SortingLayer: 5
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.12941174, g: 0.3273061, b: 0.77254903, a: 1}

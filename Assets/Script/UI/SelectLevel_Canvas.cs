@@ -80,16 +80,23 @@ public class SelectLevel_Canvas : Singleton<SelectLevel_Canvas>
     }
     void BackMain_Canvas()
     {
-        UIManager.Instance.BackMain_canvas();
+        //UIManager.Instance.BackMain_canvas();
+        UIManager.Instance.ExecuteAcion(GameEvent.DisplayMainUI);
     }
 
     void Event_PlayLevel(int levelId)
     {
         Debug.Log("Load level  " + levelId);
-        //string levelPath = levelManager.GetPath(levelId);
-        GridManager.Instance.LoadLevel(levelId);
-        UIManager.Instance.SetupBackground(-455f);
-        UIManager.Instance.PlayIngameUI();
+        ////string levelPath = levelManager.GetPath(levelId);
+        //GridManager.Instance.LoadLevel(levelId);
+        //UIManager.Instance.SetupBackground(-455f);
+        //UIManager.Instance.PlayIngameUI();
+        UIManager.Instance.ExecuteAcion(() =>
+        {
+            GridManager.Instance.LoadLevel(levelId);
+            UIManager.Instance.SetupBackground(-455f);
+            UIManager.Instance.PlayIngameUI();
+        });
     }
     void Play_New_Level()
     {

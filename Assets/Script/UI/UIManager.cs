@@ -1,3 +1,5 @@
+using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -9,38 +11,62 @@ public class UIManager : Singleton<UIManager>
     public GameObject UIMain_canvas;
     public GameObject UISelectLevel_canvas;
     public GameObject UI_Ingame;
-    public GameObject UI_LoadScreen;
+    public Image UI_LoadScreenImg;
 
+    public GameObject PassLevel_canvas;
+    public GameObject FailLevel_canvas;
+
+    //GameObject backgroundImg;
     // Start is called before the first frame update
     void Start()
     {
-        GameEvent.OnLoadScreen += DisplayScreenUI;
+        GameEvent.OnDisplayMainUI += BackMain_canvas;
+        GameEvent.OnDisplaySelectLvUI += DisplaySelected_canvas;
+
+        GameEvent.OnPassLevel += DisPlayPassLevelCanvas;
+        GameEvent.OnFailLevel += DisPlayFailLevelCanvas;
+
         StartUI();
     }
 
     private void OnDisable()
     {
-        GameEvent.OnLoadScreen -= DisplayScreenUI;
+        GameEvent.OnDisplayMainUI -= BackMain_canvas;
+        GameEvent.OnDisplaySelectLvUI -= DisplaySelected_canvas;
+        GameEvent.OnPassLevel -= DisPlayPassLevelCanvas;
+        GameEvent.OnFailLevel -= DisPlayFailLevelCanvas;
+    }
+
+    public void ExecuteAcion(Action action)
+    {
+        UI_LoadScreenImg.gameObject.SetActive(true);
+        UI_LoadScreenImg.DOFade(1f, 0.7f).OnComplete(() =>
+        {
+            action();
+
+            UI_LoadScreenImg.DOFade(0f, .2f).OnComplete(() => 
+            {
+                UI_LoadScreenImg.gameObject.SetActive(false);
+            });
+        });
     }
 
     void StartUI()
     {
-        UI_LoadScreen.SetActive(false);
-        BackMain_canvas();
+        //BackMain_canvas();
+        ExecuteAcion(GameEvent.DisplayMainUI);
     }
 
-    public void BackMain_canvas()
+    private void BackMain_canvas()
     {
-        DisplayScreenUI();
         UIMain_canvas.SetActive(true);
         UISelectLevel_canvas.SetActive(false);
         UI_Ingame.SetActive(false);
         SetupBackground(588f);
     }
 
-    public void DisplaySelected_canvas()
+    private void DisplaySelected_canvas()
     {
-        DisplayScreenUI();
         UIMain_canvas.SetActive(false);
         UISelectLevel_canvas.SetActive(true);
         UI_Ingame.SetActive(false);
@@ -48,31 +74,32 @@ public class UIManager : Singleton<UIManager>
 
     public void PlayIngameUI()
     {
-        DisplayScreenUI();
         UISelectLevel_canvas.SetActive(false);
         UI_Ingame.SetActive(true);
     }
 
     public void SetupBackground(float posX)
     {
-        RectTransform rt = this.transform.GetChild(0).GetComponent<RectTransform>();
+        RectTransform rt = this.transform.GetChild(0).transform.GetChild(0).GetComponent<RectTransform>();
         Vector2 pos = rt.anchoredPosition;
         pos.x = posX;
         rt.anchoredPosition = pos;
+        //if (backgroundImg == null)
+        //{
+        //    backgroundImg = GameObject.Find("Background");
+        //}
+        //Vector2 pos = backgroundImg.transform.position;
+        //pos.x = posX;
+        //backgroundImg.transform.position = pos;
     }
 
-    void DisplayScreenUI()
+    public void DisPlayPassLevelCanvas()
     {
-        UI_LoadScreen.SetActive(true);
+        PassLevel_canvas.SetActive(true);
     }
 
-    public void PassLevel()
+    public void DisPlayFailLevelCanvas()
     {
-
-    }
-
-    public void FailLevel()
-    {
-
+        FailLevel_canvas.SetActive(true);
     }
 }

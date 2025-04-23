@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1227746656287619494}
   - component: {fileID: 1227746656287619493}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -71,8 +71,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -475464695
-  m_SortingLayer: 2
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
@@ -95,7 +95,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7427766381979149}
   - component: {fileID: 1682070615735297051}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -155,8 +155,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -475464695
-  m_SortingLayer: 2
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.7735849, g: 0.23919211, b: 0.12771447, a: 1}

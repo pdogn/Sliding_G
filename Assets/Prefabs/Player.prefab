@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2802126416329521259}
   - component: {fileID: 5424555385242734103}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70,8 +70,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 335909393
-  m_SortingLayer: 4
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 6
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.34062156, g: 0.9339623, b: 0.23349057, a: 1}
@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 2241242055630968182}
   - component: {fileID: 672316510264917802}
   - component: {fileID: 1858905148605195723}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -159,8 +159,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 335909393
-  m_SortingLayer: 4
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 5
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
@@ -188,7 +188,7 @@ MonoBehaviour:
   currentIndex: {x: 0, y: 0}
   target: {x: 0, y: 0}
   timeMoveToNextblock: 0.03
-  gainedCoins: 0
+  receivedCoins: 0
 --- !u!61 &2241242055630968182
 BoxCollider2D:
   m_ObjectHideFlags: 0

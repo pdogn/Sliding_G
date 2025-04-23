@@ -23,7 +23,8 @@ public class Main_Canvas : MonoBehaviour
 
     void PlayGameBtn1()
     {
-        UIManager.Instance.DisplaySelected_canvas();
+        //UIManager.Instance.DisplaySelected_canvas();
+        UIManager.Instance.ExecuteAcion(GameEvent.DisplaySelectLvUI);
     }
     void SettingBtn()
     {

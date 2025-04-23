@@ -157,7 +157,7 @@ public class GridManager : Singleton<GridManager>
                     GameObject titleObj = Instantiate(tilePrefabs[tileType], spawnPos, Quaternion.identity, spawnedBlockParent);
                     allBlockObj[i, j] = titleObj;
 
-                    if (tileType == (int)BlockTitleMap.empty)
+                    if (tileType == (int)BlockTitleMap.empty || tileType == (int)BlockTitleMap.start)
                     {
                         allBlockObj[i, j].SetActive(false);
                     }

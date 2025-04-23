@@ -6,22 +6,50 @@ using UnityEngine;
 public static class GameEvent
 {
     public static event Action<int> OnCoinChanged;
-    public static event Action<int> OnStarChanged;
+    public static event Action<int> OnTotalCoinChanged;
 
-    public static event Action OnLoadScreen;
+    public static event Action<int> OnStarChanged;
+    public static event Action<int> OnTotalStarChanged;
+
+    public static event Action OnDisplayMainUI;
+    public static event Action OnDisplaySelectLvUI;
+
+    public static event Action OnPassLevel;
+    public static event Action OnFailLevel;
 
     public static void CoinChanged(int coins)
     {
         OnCoinChanged?.Invoke(coins);
     }
+    public static void TotalCoinChanged(int coins)
+    {
+        OnTotalCoinChanged?.Invoke(coins);
+    }
     public static void StarChanged(int stars)
     {
         OnStarChanged?.Invoke(stars);
     }
-
-    public static void OnLoadScreenUi()
+    public static void TotalStarChanged(int stars)
     {
-        OnLoadScreen?.Invoke();
+        OnTotalStarChanged?.Invoke(stars);
+    }
+
+    public static void DisplayMainUI()
+    {
+        OnDisplayMainUI?.Invoke();
+    }
+    public static void DisplaySelectLvUI()
+    {
+        OnDisplaySelectLvUI?.Invoke();
+    }
+
+    public static void Pass_Level()
+    {
+        OnPassLevel?.Invoke();
+    }
+    public static void Fail_Level()
+    {
+        OnFailLevel?.Invoke();
     }
 }
 
