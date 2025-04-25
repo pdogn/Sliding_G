@@ -62,6 +62,7 @@ public class UIManager : Singleton<UIManager>
         UISelectLevel_canvas.SetActive(false);
         UI_Ingame.SetActive(false);
         SetupBackground(588f);
+        GridManager.Instance.gameObject.SetActive(false);
     }
 
     private void DisplaySelected_canvas()
@@ -95,10 +96,12 @@ public class UIManager : Singleton<UIManager>
     public void DisPlayPassLevelCanvas()
     {
         Pass_Fail_canvas.SetActive(true);
+        Pass_Fail_canvas.GetComponent<Pass_Fail_UI_Canvas>().ShowPassLevelUI();
     }
 
     public void DisPlayFailLevelCanvas()
     {
         Pass_Fail_canvas.SetActive(true);
+        Pass_Fail_canvas.GetComponent<Pass_Fail_UI_Canvas>().ShowFailLevelUI();
     }
 }

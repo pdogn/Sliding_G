@@ -21,12 +21,12 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            GridManager.Instance.SaveLevel();
-            int unlockedLevel = PlayerPrefs.GetInt("UnlockedLevel", 1);
-            PlayerPrefs.SetInt("UnlockedLevel", unlockedLevel + 1);
-        }
+        //if (Input.GetKeyDown(KeyCode.P))
+        //{
+        //    GridManager.Instance.SaveLevelJson();
+        //    int unlockedLevel = PlayerPrefs.GetInt("UnlockedLevel", 1);
+        //    PlayerPrefs.SetInt("UnlockedLevel", unlockedLevel + 1);
+        //}
     }
 
     void OnSwipeDetected(Vector2 direction)
@@ -83,7 +83,7 @@ public class Player : MonoBehaviour
         }
         if (direction == Vector2.left)
         {
-            if (y - 1 < GridManager.Instance.GridSizeX && GridManager.Instance.allBlockObj[x, y - 1] != null)
+            if (y - 1 >= 0 && GridManager.Instance.allBlockObj[x, y - 1] != null)
             {
                 int value = GridManager.Instance.grid[x, y - 1];
                 if (value == 0 || value == 2 || value == 3 || value == 6 || value == 7)
@@ -107,7 +107,7 @@ public class Player : MonoBehaviour
         }
         if (direction == Vector2.up)
         {
-            if (x - 1 < GridManager.Instance.GridSizeY && GridManager.Instance.allBlockObj[x - 1, y] != null)
+            if (x - 1 >= 0 && GridManager.Instance.allBlockObj[x - 1, y] != null)
             {
                 int value = GridManager.Instance.grid[x - 1, y];
                 if (value == 0 || value == 2 || value == 3 || value == 6 || value == 7)
@@ -170,7 +170,18 @@ public class Player : MonoBehaviour
 
         if (collision.CompareTag("Finish"))
         {
+            Debug.Log("fnnnn");
+
             GameEvent.DisplayPass_LevelUI();
+            GridManager.Instance.SaveLevelJson();
+            int crrLevel = GameManager.Instance.CurrenLevel;
+            int unlockedLevel = PlayerPrefs.GetInt("UnlockedLevel", 1);
+            if(crrLevel == unlockedLevel)
+            {
+                PlayerPrefs.SetInt("UnlockedLevel", unlockedLevel + 1);
+            }
+
+            //this.gameObject.SetActive(false);
         }
     }
 }

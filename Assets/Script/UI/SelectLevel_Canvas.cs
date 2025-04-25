@@ -28,6 +28,13 @@ public class SelectLevel_Canvas : Singleton<SelectLevel_Canvas>
     protected override void Awake()
     {
         levelManager = FindObjectOfType<LevelManager>();
+
+        Img_LevelPress = Resources.Load<Sprite>(Img_LevelPressPath);
+        Img_LevelLocked = Resources.Load<Sprite>(Img_LevelLockedPath);
+    }
+    private void OnEnable()
+    {
+        Load_UI_SelectLevel();
     }
 
     void Start()
@@ -35,15 +42,12 @@ public class SelectLevel_Canvas : Singleton<SelectLevel_Canvas>
         GameEvent.OnReplayLevel += Event_PlayLevel;
         GameEvent.OnPlayNextLevel += Play_New_Level;
 
-        Img_LevelPress = Resources.Load<Sprite>(Img_LevelPressPath);
-        Img_LevelLocked = Resources.Load<Sprite>(Img_LevelLockedPath);
-
         btn_backMainCanvas.onClick.AddListener(BackMain_Canvas);
         btn_PlayNewLevel.onClick.AddListener(Play_New_Level);
         btn_Shop.onClick.AddListener(OpenShop);
 
-        Load_UI_SelectLevel();
     }
+    
     //private void OnDisable()
     //{
     //    //GameEvent.OnReplayLevel -= Event_PlayLevel;
@@ -62,7 +66,10 @@ public class SelectLevel_Canvas : Singleton<SelectLevel_Canvas>
             Button[] btns = item.GetComponentsInChildren<Button>(true);
             foreach (Button btn in btns)
             {
-                buttons.Add(btn);
+                if (!buttons.Contains(btn))
+                {
+                    buttons.Add(btn);
+                }
             }
         }
 
@@ -107,6 +114,7 @@ public class SelectLevel_Canvas : Singleton<SelectLevel_Canvas>
         //UIManager.Instance.PlayIngameUI();
         UIManager.Instance.ExecuteAcion(() =>
         {
+            GridManager.Instance.gameObject.SetActive(true);
             GridManager.Instance.LoadLevel(levelId);
             UIManager.Instance.SetupBackground(-455f);
             UIManager.Instance.PlayIngameUI();

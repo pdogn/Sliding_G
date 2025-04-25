@@ -157,7 +157,7 @@ public class GridManager : Singleton<GridManager>
                     GameObject titleObj = Instantiate(tilePrefabs[tileType], spawnPos, Quaternion.identity, spawnedBlockParent);
                     allBlockObj[i, j] = titleObj;
 
-                    if (tileType == (int)BlockTitleMap.empty || tileType == (int)BlockTitleMap.start)
+                    if (tileType == (int)BlockTitleMap.empty)
                     {
                         allBlockObj[i, j].SetActive(false);
                     }
@@ -168,8 +168,9 @@ public class GridManager : Singleton<GridManager>
                         {
                             player = Instantiate(PlayerPrefab, spawnPos, Quaternion.identity);
                         }
-
+                        player.SetActive(false);
                         player.GetComponent<Player>().SetPlayer(new Vector2(i, j), spawnPos);
+                        player.SetActive(true);
                     }
 
                     if (tileType == (int)BlockTitleMap.enemyPos)
@@ -186,7 +187,7 @@ public class GridManager : Singleton<GridManager>
     }
 
 
-    public void SaveLevel()
+    public void SaveLevelJson()
     {
         LevelData saveData = new LevelData();
         saveData.rows = grid.GetLength(0);
@@ -217,4 +218,14 @@ public class GridManager : Singleton<GridManager>
         File.WriteAllText(saveFilePath, json);
         Debug.Log("Grid saved to: " + saveFilePath);
     }
+
+    //public void SaveLevel(bool allow)
+    //{
+    //    if (allow == false) return;
+
+    //    GameEvent.DisplayPass_LevelUI();
+    //    this.SaveLevelJson();
+    //    int unlockedLevel = PlayerPrefs.GetInt("UnlockedLevel", 1);
+    //    PlayerPrefs.SetInt("UnlockedLevel", unlockedLevel + 1);
+    //}
 }

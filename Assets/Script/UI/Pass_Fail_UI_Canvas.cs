@@ -15,7 +15,7 @@ public class Pass_Fail_UI_Canvas : MonoBehaviour
     {
         btn_Home.onClick.AddListener(() => 
         {
-            GameEvent.DisplayMainUI();
+            UIManager.Instance.ExecuteAcion(GameEvent.DisplayMainUI);
             this.gameObject.SetActive(false);
         });
         btn_RePlay.onClick.AddListener(() => {
@@ -25,7 +25,8 @@ public class Pass_Fail_UI_Canvas : MonoBehaviour
         });
         btn_Next.onClick.AddListener(() => 
         {
-            GameEvent.PlayNextLevel();
+            int crrLv = GameManager.Instance.CurrenLevel;
+            GameEvent.ReplayLevel(crrLv+1);
             this.gameObject.SetActive(false);
         });
     }
