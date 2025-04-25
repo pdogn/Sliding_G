@@ -30,7 +30,7 @@ public class GridManager : Singleton<GridManager>
     public GameObject[] tilePrefabs;
     float tileSize = .5f;
 
-    public GameObject PlayerPrefab;
+    public GameObject Player;
 
     //[SerializeField] int gridSizeX;
     //[SerializeField] int gridSizeY;
@@ -44,7 +44,6 @@ public class GridManager : Singleton<GridManager>
     public int GridSizeY { get; private set; }
 
     public int CurrenlevelIndex;
-    GameObject player;
 
     protected override void Awake()
     {
@@ -164,13 +163,14 @@ public class GridManager : Singleton<GridManager>
 
                     if (tileType == (int)BlockTitleMap.start)
                     {
-                        if (player == null)
+                        if (Player == null)
                         {
-                            player = Instantiate(PlayerPrefab, spawnPos, Quaternion.identity);
+                            GameObject PlayerPrefab = Resources.Load<GameObject>("Prefabs/Player");
+                            Player = Instantiate(PlayerPrefab, spawnPos, Quaternion.identity);
                         }
-                        player.SetActive(false);
-                        player.GetComponent<Player>().SetPlayer(new Vector2(i, j), spawnPos);
-                        player.SetActive(true);
+                        Player.SetActive(false);
+                        Player.GetComponent<Player>().SetPlayer(new Vector2(i, j), spawnPos);
+                        Player.SetActive(true);
                     }
 
                     if (tileType == (int)BlockTitleMap.enemyPos)

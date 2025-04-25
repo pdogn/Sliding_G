@@ -73,15 +73,15 @@ public static class GameEvent
 
 public class GameManager : Singleton<GameManager>
 {
-    [SerializeField] private int level;
+    [SerializeField] private int crrlevel;
     public int CurrenLevel
     {
-        get { return level; }
+        get { return crrlevel; }
         set 
         {
-            if(level != value)
+            if(crrlevel != value)
             {
-                level = value;
+                crrlevel = value;
                 //GameEvent.LevelChanged(level);
             }
         }
@@ -121,8 +121,13 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
-    public int totalStars;
+    //public int totalStars;
 
-    //public event Action<int> OnCoinChanged;
-    //public event Action<int> OnStarChanged;
+    public bool isPlayingLevel;
+
+    private void Start()
+    {
+        totalCoin = PlayerPrefs.GetInt("TotalCoins", 150);
+    }
+
 }

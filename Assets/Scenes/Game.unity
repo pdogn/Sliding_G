@@ -2370,6 +2370,7 @@ MonoBehaviour:
   UI_Ingame: {fileID: 255942267}
   UI_LoadScreenImg: {fileID: 682090341}
   Pass_Fail_canvas: {fileID: 2140826221}
+  PauseMenu_canvas: {fileID: 0}
 --- !u!1 &1558782020
 GameObject:
   m_ObjectHideFlags: 0
@@ -2416,9 +2417,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0303fb0f59e20f04286e7f3162c599dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: 0
+  crrlevel: 0
   totalCoin: 0
-  totalStars: 0
 --- !u!1 &1590202804
 GameObject:
   m_ObjectHideFlags: 0

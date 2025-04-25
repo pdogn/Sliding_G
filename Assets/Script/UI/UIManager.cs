@@ -15,6 +15,8 @@ public class UIManager : Singleton<UIManager>
 
     public GameObject Pass_Fail_canvas;
 
+    public GameObject PauseMenu_canvas;
+
     //GameObject backgroundImg;
     // Start is called before the first frame update
     void Start()
@@ -97,11 +99,13 @@ public class UIManager : Singleton<UIManager>
     {
         Pass_Fail_canvas.SetActive(true);
         Pass_Fail_canvas.GetComponent<Pass_Fail_UI_Canvas>().ShowPassLevelUI();
+        GameManager.Instance.isPlayingLevel = false;
     }
 
     public void DisPlayFailLevelCanvas()
     {
         Pass_Fail_canvas.SetActive(true);
         Pass_Fail_canvas.GetComponent<Pass_Fail_UI_Canvas>().ShowFailLevelUI();
+        GameManager.Instance.isPlayingLevel = false;
     }
 }

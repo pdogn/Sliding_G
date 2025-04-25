@@ -11,7 +11,7 @@ public class Ui_Ingame : MonoBehaviour
     [SerializeField] TextMeshProUGUI StarsTxt;
 
     [SerializeField] Button PauseBtn;
-
+    private const string Pause_canvas_Path = "Prefabs/UI/Pause_canvas";
     private void OnEnable()
     {
         GameEvent.OnCoinChanged += UpdateCoinUI;
@@ -40,6 +40,17 @@ public class Ui_Ingame : MonoBehaviour
 
     private void PauseGame()
     {
+        ShowPausePanel();
+    }
 
+    private void ShowPausePanel()
+    {
+        if(UIManager.Instance.PauseMenu_canvas == null)
+        {
+            GameObject PauseCanvas_Prefab = Resources.Load<GameObject>(Pause_canvas_Path);
+            GameObject go = Instantiate(PauseCanvas_Prefab, this.transform.parent);
+            UIManager.Instance.PauseMenu_canvas = go;
+        }
+        UIManager.Instance.PauseMenu_canvas.SetActive(true);
     }
 }

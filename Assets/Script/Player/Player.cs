@@ -157,6 +157,8 @@ public class Player : MonoBehaviour
         target = _target;
         currentIndex = target;
         this.transform.position = _position;
+        receivedCoins = 0;
+        GameManager.Instance.Coins = receivedCoins;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -180,6 +182,9 @@ public class Player : MonoBehaviour
             {
                 PlayerPrefs.SetInt("UnlockedLevel", unlockedLevel + 1);
             }
+
+            GameManager.Instance.totalCoin += receivedCoins;
+            PlayerPrefs.SetInt("TotalCoins", GameManager.Instance.totalCoin);
 
             //this.gameObject.SetActive(false);
         }
