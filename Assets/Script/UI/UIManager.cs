@@ -65,6 +65,8 @@ public class UIManager : Singleton<UIManager>
         UI_Ingame.SetActive(false);
         SetupBackground(588f);
         GridManager.Instance.gameObject.SetActive(false);
+        GameManager.Instance.isPlayingLevel = false;
+        if(GridManager.Instance.Player != null) GridManager.Instance.Player.SetActive(false);
     }
 
     private void DisplaySelected_canvas()

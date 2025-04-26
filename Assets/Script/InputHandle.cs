@@ -19,6 +19,11 @@ public class InputHandle : Singleton<InputHandle>
 
     void Update()
     {
+        if (!GameManager.Instance.isPlayingLevel)
+        {
+            isSwiping = false;
+            return;
+        }
 #if UNITY_EDITOR
         HandleMouseSwipe();
 #else
@@ -28,6 +33,12 @@ public class InputHandle : Singleton<InputHandle>
 
     void HandleMouseSwipe()
     {
+        //if (!GameManager.Instance.isPlayingLevel)
+        //{
+        //    isSwiping = false;
+        //    return;
+        //}
+
         if (Input.GetMouseButtonDown(0))
         {
             startTouchPosition = Input.mousePosition;
@@ -43,6 +54,8 @@ public class InputHandle : Singleton<InputHandle>
 
     void HandleTouchSwipe()
     {
+        //if (!GameManager.Instance.isPlayingLevel) return;
+
         if (Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(0);

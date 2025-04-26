@@ -52,5 +52,6 @@ public class Ui_Ingame : MonoBehaviour
             UIManager.Instance.PauseMenu_canvas = go;
         }
         UIManager.Instance.PauseMenu_canvas.SetActive(true);
+        GameManager.Instance.isPlayingLevel = false;
     }
 }

@@ -119,6 +119,7 @@ public class SelectLevel_Canvas : Singleton<SelectLevel_Canvas>
             UIManager.Instance.SetupBackground(-455f);
             UIManager.Instance.PlayIngameUI();
         });
+        GameManager.Instance.isPlayingLevel = true;
     }
     void Play_New_Level()
     {
