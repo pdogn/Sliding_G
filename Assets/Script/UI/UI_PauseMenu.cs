@@ -21,7 +21,7 @@ public class UI_PauseMenu : MonoBehaviour
     void ExitPopup()
     {
         this.gameObject.SetActive(false);
-        GameManager.Instance.isPlayingLevel = false;
+        GameManager.Instance.isPlayingTGamePlay = false;
     }
 
     void Home_Btn()

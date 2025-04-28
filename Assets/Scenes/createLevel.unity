@@ -246,8 +246,8 @@ MonoBehaviour:
   - {fileID: 6216620696578221185, guid: a7045f40a98b8ea4191fd4a6e20f6fee, type: 3}
   - {fileID: 891441037997670768, guid: 5b9e3baeda207594c8b42ac7e7d66c6b, type: 3}
   - {fileID: 3796306760088627780, guid: 9e88c5582dc1d4b499557b0d08f44dd4, type: 3}
-  PlayerPrefab: {fileID: 7264672337269417286, guid: 690942c2eba82d14fb625fb5592f78fd, type: 3}
-  CurrenlevelIndex: 0
+  Player: {fileID: 0}
+  CurrenlevelIndex: 1
 --- !u!4 &689382744
 Transform:
   m_ObjectHideFlags: 0
@@ -319,10 +319,6 @@ PrefabInstance:
     - target: {fileID: 4300185574087845982, guid: 3f061116419f13b4c9e41bd29fd5e5b1, type: 3}
       propertyPath: m_Name
       value: MapCreateJson
-      objectReference: {fileID: 0}
-    - target: {fileID: 4300185574087845982, guid: 3f061116419f13b4c9e41bd29fd5e5b1, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4300185574087845983, guid: 3f061116419f13b4c9e41bd29fd5e5b1, type: 3}
       propertyPath: m_RootOrder

@@ -1318,7 +1318,7 @@ MonoBehaviour:
   - {fileID: 891441037997670768, guid: 5b9e3baeda207594c8b42ac7e7d66c6b, type: 3}
   - {fileID: 3796306760088627780, guid: 9e88c5582dc1d4b499557b0d08f44dd4, type: 3}
   - {fileID: 1227746656287619492, guid: fbc45a900ee639944b7c169c6a8efe5d, type: 3}
-  PlayerPrefab: {fileID: 7264672337269417286, guid: 690942c2eba82d14fb625fb5592f78fd, type: 3}
+  Player: {fileID: 0}
   CurrenlevelIndex: 0
 --- !u!4 &689382744
 Transform:
@@ -2419,6 +2419,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   crrlevel: 0
   totalCoin: 0
+  stars: 0
+  isPlayingTGamePlay: 0
 --- !u!1 &1590202804
 GameObject:
   m_ObjectHideFlags: 0
@@ -3005,6 +3007,10 @@ PrefabInstance:
     - target: {fileID: 4300185574087845982, guid: 3f061116419f13b4c9e41bd29fd5e5b1, type: 3}
       propertyPath: m_Name
       value: MapCreateJson
+      objectReference: {fileID: 0}
+    - target: {fileID: 4300185574087845982, guid: 3f061116419f13b4c9e41bd29fd5e5b1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4300185574087845983, guid: 3f061116419f13b4c9e41bd29fd5e5b1, type: 3}
       propertyPath: m_RootOrder

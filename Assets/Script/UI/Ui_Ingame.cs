@@ -12,10 +12,13 @@ public class Ui_Ingame : MonoBehaviour
 
     [SerializeField] Button PauseBtn;
     private const string Pause_canvas_Path = "Prefabs/UI/Pause_canvas";
+
     private void OnEnable()
     {
         GameEvent.OnCoinChanged += UpdateCoinUI;
         GameEvent.OnStarChanged += UpdateStarUI;
+
+        StarsTxt.text = "Stars: " + GameManager.Instance.Stars;
     }
 
     private void Start()
@@ -52,6 +55,6 @@ public class Ui_Ingame : MonoBehaviour
             UIManager.Instance.PauseMenu_canvas = go;
         }
         UIManager.Instance.PauseMenu_canvas.SetActive(true);
-        GameManager.Instance.isPlayingLevel = false;
+        GameManager.Instance.isPlayingTGamePlay = false;
     }
 }

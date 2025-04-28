@@ -9,9 +9,8 @@ public enum BlockTitleMap
     start = 2,
     enemyPos = 3,
     firePos = 4,
-    hammerPos = 5,
+    Star = 5,
     end = 6,
     Coin = 7,
-    Star = 8,
 }
 

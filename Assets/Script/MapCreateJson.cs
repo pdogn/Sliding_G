@@ -247,7 +247,7 @@ public class GridPainterEditor : Editor
             gridPainter.currentColorIndex = 4;
         }
         GUI.backgroundColor = gridPainter.colors[4];
-        if (GUILayout.Button("hammer", GUILayout.Width(100), GUILayout.Height(30)))
+        if (GUILayout.Button("star", GUILayout.Width(100), GUILayout.Height(30)))
         {
             gridPainter.currentColorIndex = 5;
         }

@@ -19,7 +19,7 @@ public class InputHandle : Singleton<InputHandle>
 
     void Update()
     {
-        if (!GameManager.Instance.isPlayingLevel)
+        if (!GameManager.Instance.isPlayingTGamePlay)
         {
             isSwiping = false;
             return;

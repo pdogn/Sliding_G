@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     [SerializeField] float timeMoveToNextblock = 0.1f;
     bool isMoving;
     public int receivedCoins;
+    public int receivedStars;
 
     // Start is called before the first frame update
     void Start()
@@ -74,7 +75,7 @@ public class Player : MonoBehaviour
             if (y + 1 < GridManager.Instance.GridSizeX && GridManager.Instance.allBlockObj[x, y+1] != null)
             {
                 int value = GridManager.Instance.grid[x, y + 1];
-                if (value == 0 || value == 2 || value == 3 || value == 6 || value == 7)
+                if (value == 0 || value == 2 || value == 3 || value == 5 || value == 6 || value == 7)
                 {
                     target = new Vector2(x, y + 1);
                     FindTarget(direction, new Vector2(x, y + 1));
@@ -86,7 +87,7 @@ public class Player : MonoBehaviour
             if (y - 1 >= 0 && GridManager.Instance.allBlockObj[x, y - 1] != null)
             {
                 int value = GridManager.Instance.grid[x, y - 1];
-                if (value == 0 || value == 2 || value == 3 || value == 6 || value == 7)
+                if (value == 0 || value == 2 || value == 3 || value == 5 || value == 6|| value == 5 || value == 7)
                 {
                     target = new Vector2(x, y - 1);
                     FindTarget(direction, new Vector2(x, y - 1));
@@ -98,7 +99,7 @@ public class Player : MonoBehaviour
             if (x + 1 < GridManager.Instance.GridSizeY && GridManager.Instance.allBlockObj[x+1, y] != null)
             {
                 int value = GridManager.Instance.grid[x + 1, y];
-                if (value == 0 || value == 2 || value == 3 || value == 6 || value == 7)
+                if (value == 0 || value == 2 || value == 3 || value == 5 || value == 6 || value == 7)
                 {
                     target = new Vector2(x + 1, y);
                     FindTarget(direction, new Vector2(x + 1, y));
@@ -110,7 +111,7 @@ public class Player : MonoBehaviour
             if (x - 1 >= 0 && GridManager.Instance.allBlockObj[x - 1, y] != null)
             {
                 int value = GridManager.Instance.grid[x - 1, y];
-                if (value == 0 || value == 2 || value == 3 || value == 6 || value == 7)
+                if (value == 0 || value == 2 || value == 3 || value == 5 || value == 6 || value == 7)
                 {
                     target = new Vector2(x - 1, y);
                     FindTarget(direction, new Vector2(x - 1, y));
@@ -158,7 +159,9 @@ public class Player : MonoBehaviour
         currentIndex = target;
         this.transform.position = _position;
         receivedCoins = 0;
+        //receivedStars = 0;
         GameManager.Instance.Coins = receivedCoins;
+        //GameManager.Instance.Stars = receivedStars;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -169,12 +172,20 @@ public class Player : MonoBehaviour
             receivedCoins += 1;
             GameManager.Instance.Coins = receivedCoins;
         }
+        if (collision.CompareTag("star"))
+        {
+            collision.gameObject.SetActive(false);
+            //receivedStars += 1;
+            GameManager.Instance.Stars += 1; //receivedStars;
+            GameManager.Instance.SetLevelStars(GameManager.Instance.CurrenLevel, GameManager.Instance.Stars);
+        }
 
         if (collision.CompareTag("Finish"))
         {
             Debug.Log("fnnnn");
 
             GameEvent.DisplayPass_LevelUI();
+            GameManager.Instance.SaveStarLevels();
             GridManager.Instance.SaveLevelJson();
             int crrLevel = GameManager.Instance.CurrenLevel;
             int unlockedLevel = PlayerPrefs.GetInt("UnlockedLevel", 1);

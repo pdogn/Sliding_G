@@ -65,7 +65,7 @@ public class UIManager : Singleton<UIManager>
         UI_Ingame.SetActive(false);
         SetupBackground(588f);
         GridManager.Instance.gameObject.SetActive(false);
-        GameManager.Instance.isPlayingLevel = false;
+        GameManager.Instance.isPlayingTGamePlay = false;
         if(GridManager.Instance.Player != null) GridManager.Instance.Player.SetActive(false);
     }
 
@@ -76,7 +76,7 @@ public class UIManager : Singleton<UIManager>
         UI_Ingame.SetActive(false);
     }
 
-    public void PlayIngameUI()
+    public void ShowIngameUI()
     {
         UISelectLevel_canvas.SetActive(false);
         UI_Ingame.SetActive(true);
@@ -101,13 +101,13 @@ public class UIManager : Singleton<UIManager>
     {
         Pass_Fail_canvas.SetActive(true);
         Pass_Fail_canvas.GetComponent<Pass_Fail_UI_Canvas>().ShowPassLevelUI();
-        GameManager.Instance.isPlayingLevel = false;
+        GameManager.Instance.isPlayingTGamePlay = false;
     }
 
     public void DisPlayFailLevelCanvas()
     {
         Pass_Fail_canvas.SetActive(true);
         Pass_Fail_canvas.GetComponent<Pass_Fail_UI_Canvas>().ShowFailLevelUI();
-        GameManager.Instance.isPlayingLevel = false;
+        GameManager.Instance.isPlayingTGamePlay = false;
     }
 }
