@@ -102,7 +102,7 @@ public class SelectLevel_Canvas : Singleton<SelectLevel_Canvas>
         {
             int lvid = j + 1;
             int starOfLevel = GameManager.Instance.GetLevelStars(lvid);
-            Debug.Log("Star of level: " + starOfLevel);
+            Debug.Log("Star of level: "+ lvid + ": " + starOfLevel);
             if(starOfLevel == 0)
             {
                 buttons[j].transform.GetChild(1).gameObject.SetActive(false);
@@ -113,10 +113,10 @@ public class SelectLevel_Canvas : Singleton<SelectLevel_Canvas>
             {
                 for(int p=1; p<4; p++)
                 {
-                    buttons[starOfLevel].transform.GetChild(1).gameObject.SetActive(false);
+                    buttons[j].transform.GetChild(p).gameObject.SetActive(false);
                     if (p == starOfLevel)
                     {
-                        buttons[p].transform.GetChild(1).gameObject.SetActive(true);
+                        buttons[j].transform.GetChild(p).gameObject.SetActive(true);
                     }
                 }
             }
