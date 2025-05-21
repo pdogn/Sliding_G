@@ -16,6 +16,7 @@ public class UIManager : Singleton<UIManager>
     public GameObject Pass_Fail_canvas;
 
     public GameObject PauseMenu_canvas;
+    public GameObject Setting_canvas;
 
     //GameObject backgroundImg;
     // Start is called before the first frame update

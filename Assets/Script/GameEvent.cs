@@ -19,6 +19,8 @@ public static class GameEvent
     public static event Action<int> OnReplayLevel;
     public static event Action OnPlayNextLevel;
 
+    public static event Action ClickSetting;
+
     //public static void LevelChanged(int level)
     //{
     //    OnLevelChanged?.Invoke(level);
@@ -65,5 +67,10 @@ public static class GameEvent
     public static void PlayNextLevel()
     {
         OnPlayNextLevel?.Invoke();
+    }
+
+    public static void ShowSettingPanel()
+    {
+        ClickSetting?.Invoke();
     }
 }

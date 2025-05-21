@@ -12,10 +12,16 @@ public class Main_Canvas : MonoBehaviour
     [SerializeField] Button Facebok;
     [SerializeField] Button RemoveAds;
 
+    private const string Setting_canvas_Path = "Prefabs/UI/Setting_canvas";
+
+    private void Awake()
+    {
+        GameEvent.ClickSetting += ShowSettingPanel;
+    }
     private void Start()
     {
         Play_btn.onClick.AddListener(PlayGameBtn1);
-        Setting.onClick.AddListener(SettingBtn);
+        Setting.onClick.AddListener(() => GameEvent.ShowSettingPanel());
         Description.onClick.AddListener(DesBtn);
         Facebok.onClick.AddListener(FaebokBtn);
         RemoveAds.onClick.AddListener(NotAdsBtn);
@@ -28,7 +34,7 @@ public class Main_Canvas : MonoBehaviour
     }
     void SettingBtn()
     {
-
+        //GameEvent.ShowSettingPanel();
     }
     void DesBtn()
     {
@@ -41,5 +47,17 @@ public class Main_Canvas : MonoBehaviour
     void NotAdsBtn()
     {
 
+    }
+
+    private void ShowSettingPanel()
+    {
+        if (UIManager.Instance.Setting_canvas == null)
+        {
+            GameObject SettingCanvas_Prefab = Resources.Load<GameObject>(Setting_canvas_Path);
+            GameObject go = Instantiate(SettingCanvas_Prefab, this.transform.parent);
+            UIManager.Instance.Setting_canvas = go;
+        }
+        UIManager.Instance.Setting_canvas.SetActive(true);
+        //GameManager.Instance.isPlayingTGamePlay = false;
     }
 }
