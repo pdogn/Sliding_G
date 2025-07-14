@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -18,8 +18,8 @@ public class SelectLevel_Canvas : Singleton<SelectLevel_Canvas>
         return buttons.Count;
     }
 
-    private const string Img_LevelPressPath = "Images/lvl_block_pressed";
-    private const string Img_LevelLockedPath = "Images/lvl_lok1";
+    private const string IMG_LEVELPRESSPATH = "Images/lvl_block_pressed";
+    private const string IMG_LEVELLOCKEDPATH = "Images/lvl_lok1";
     Sprite Img_LevelPress;
     Sprite Img_LevelLocked;
 
@@ -29,8 +29,8 @@ public class SelectLevel_Canvas : Singleton<SelectLevel_Canvas>
     {
         levelManager = FindObjectOfType<LevelManager>();
 
-        Img_LevelPress = Resources.Load<Sprite>(Img_LevelPressPath);
-        Img_LevelLocked = Resources.Load<Sprite>(Img_LevelLockedPath);
+        Img_LevelPress = Resources.Load<Sprite>(IMG_LEVELPRESSPATH);
+        Img_LevelLocked = Resources.Load<Sprite>(IMG_LEVELLOCKEDPATH);
     }
     private void OnEnable()
     {
@@ -73,13 +73,14 @@ public class SelectLevel_Canvas : Singleton<SelectLevel_Canvas>
             }
         }
 
+        //Load thông tin các nút chọn level
         levelManager.LoadLevelInfo();
 
         int unlockedLevel = PlayerPrefs.GetInt("UnlockedLevel", 1);
 
         for (int i = 0; i < buttons.Count; i++)
         {
-            buttons[i].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = levelManager.GetLevelName(i); //$"{i + 1}";
+            buttons[i].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = levelManager.GetLevelName(i);
 
             if (i < unlockedLevel)
             {

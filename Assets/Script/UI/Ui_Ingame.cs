@@ -19,6 +19,7 @@ public class Ui_Ingame : MonoBehaviour
         GameEvent.OnStarChanged += UpdateStarUI;
 
         StarsTxt.text = "Stars: " + GameManager.Instance.Stars;
+        levelTxt.text = "Level: " + GameManager.Instance.CurrenLevel;
     }
 
     private void Start()

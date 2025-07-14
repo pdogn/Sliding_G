@@ -14,7 +14,6 @@ public class GameManager : Singleton<GameManager>
             {
                 crrlevel = value;
                 Stars = GetLevelStars(crrlevel);
-                //GameEvent.LevelChanged(level);
             }
         }
     }
@@ -59,7 +58,6 @@ public class GameManager : Singleton<GameManager>
     /// lưu số sao nhận dược mỗi level
     /// </summary>
     #region
-    
     [System.Serializable]
     public class LevelStarsData
     {
