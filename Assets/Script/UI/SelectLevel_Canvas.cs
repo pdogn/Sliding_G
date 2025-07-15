@@ -39,7 +39,7 @@ public class SelectLevel_Canvas : Singleton<SelectLevel_Canvas>
 
     void Start()
     {
-        GameEvent.OnReplayLevel += Event_PlayLevel;
+        GameEvent.OnPlayLevel += Event_PlayLevel;
         GameEvent.OnPlayNextLevel += Play_New_Level;
 
         btn_backMainCanvas.onClick.AddListener(BackMain_Canvas);
@@ -55,7 +55,7 @@ public class SelectLevel_Canvas : Singleton<SelectLevel_Canvas>
     //}
     private void OnApplicationQuit()
     {
-        GameEvent.OnReplayLevel -= Event_PlayLevel;
+        GameEvent.OnPlayLevel -= Event_PlayLevel;
         GameEvent.OnPlayNextLevel -= Play_New_Level;
     }
 

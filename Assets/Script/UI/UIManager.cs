@@ -80,6 +80,7 @@ public class UIManager : Singleton<UIManager>
     public void ShowIngameUI()
     {
         UISelectLevel_canvas.SetActive(false);
+        UI_Ingame.SetActive(false);
         UI_Ingame.SetActive(true);
     }
 

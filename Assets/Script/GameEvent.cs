@@ -16,7 +16,7 @@ public static class GameEvent
     public static event Action OnPassLevel;
     public static event Action OnFailLevel;
 
-    public static event Action<int> OnReplayLevel;
+    public static event Action<int> OnPlayLevel;
     public static event Action OnPlayNextLevel;
 
     public static event Action ClickSetting;
@@ -60,9 +60,9 @@ public static class GameEvent
     {
         OnFailLevel?.Invoke();
     }
-    public static void ReplayLevel(int lvId)
+    public static void PlayLevel(int lvId)
     {
-        OnReplayLevel?.Invoke(lvId);
+        OnPlayLevel?.Invoke(lvId);
     }
     public static void PlayNextLevel()
     {

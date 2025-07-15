@@ -13,7 +13,8 @@ public class GameManager : Singleton<GameManager>
             if(crrlevel != value)
             {
                 crrlevel = value;
-                Stars = GetLevelStars(crrlevel);
+                //Stars = GetLevelStars(crrlevel);
+                //GameEvent.LevelChanged(crrlevel);
             }
         }
     }
@@ -28,7 +29,6 @@ public class GameManager : Singleton<GameManager>
             if(coins != value)
             {
                 coins = value;
-                //OnCoinChanged?.Invoke(coins);
                 GameEvent.CoinChanged(coins);
             }
         }
@@ -46,7 +46,6 @@ public class GameManager : Singleton<GameManager>
             if(stars != value)
             {
                 stars = value;
-                //OnStarChanged?.Invoke(stars);
                 GameEvent.StarChanged(stars);
             }
         }

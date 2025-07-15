@@ -21,7 +21,7 @@ public class UI_PauseMenu : MonoBehaviour
     void ExitPopup()
     {
         this.gameObject.SetActive(false);
-        GameManager.Instance.isPlayingTGamePlay = false;
+        GameManager.Instance.isPlayingTGamePlay = true;
     }
 
     void Home_Btn()
@@ -33,7 +33,7 @@ public class UI_PauseMenu : MonoBehaviour
     void Restart_Btn()
     {
         int crrLv = GameManager.Instance.CurrenLevel;
-        GameEvent.ReplayLevel(crrLv);
+        GameEvent.PlayLevel(crrLv);
         this.gameObject.SetActive(false);
     }
 

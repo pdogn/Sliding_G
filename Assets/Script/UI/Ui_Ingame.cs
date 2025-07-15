@@ -18,7 +18,7 @@ public class Ui_Ingame : MonoBehaviour
         GameEvent.OnCoinChanged += UpdateCoinUI;
         GameEvent.OnStarChanged += UpdateStarUI;
 
-        StarsTxt.text = "Stars: " + GameManager.Instance.Stars;
+        StarsTxt.text = "Stars: " + GameManager.Instance.GetLevelStars(GameManager.Instance.CurrenLevel);
         levelTxt.text = "Level: " + GameManager.Instance.CurrenLevel;
     }
 
@@ -40,6 +40,11 @@ public class Ui_Ingame : MonoBehaviour
     private void UpdateStarUI(int newStars)
     {
         StarsTxt.text = "Stars: " + newStars.ToString();
+    }
+
+    private void UpdateLevelUI(int newLevel)
+    {
+        levelTxt.text = "Level: " + newLevel.ToString();
     }
 
     private void PauseGame()

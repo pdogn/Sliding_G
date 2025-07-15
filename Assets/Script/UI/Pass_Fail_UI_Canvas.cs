@@ -20,13 +20,13 @@ public class Pass_Fail_UI_Canvas : MonoBehaviour
         });
         btn_RePlay.onClick.AddListener(() => {
             int crrLv = GameManager.Instance.CurrenLevel;
-            GameEvent.ReplayLevel(crrLv);
+            GameEvent.PlayLevel(crrLv);
             this.gameObject.SetActive(false);
         });
         btn_Next.onClick.AddListener(() => 
         {
             int crrLv = GameManager.Instance.CurrenLevel;
-            GameEvent.ReplayLevel(crrLv+1);
+            GameEvent.PlayLevel(crrLv+1);
             this.gameObject.SetActive(false);
         });
     }
