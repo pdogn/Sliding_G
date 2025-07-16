@@ -12,6 +12,9 @@ public class Player : MonoBehaviour
     public int receivedCoins;
     public int receivedStars;
 
+    [SerializeField] ItemSkinSO itemSkinSO;
+    [SerializeField] SpriteRenderer skinPlayer;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -155,6 +158,7 @@ public class Player : MonoBehaviour
 
     public void SetPlayer(Vector2 _target, Vector3 _position)
     {
+        SetSkin(/*GameManager.Instance.CurrentSkin*/10);
         target = _target;
         currentIndex = target;
         this.transform.position = _position;
@@ -162,6 +166,18 @@ public class Player : MonoBehaviour
         //receivedStars = 0;
         GameManager.Instance.Coins = receivedCoins;
         //GameManager.Instance.Stars = receivedStars;
+    }
+
+    public void SetSkin(int index)
+    {
+        Debug.Log("Dong----setskin");
+        foreach(var skin in itemSkinSO.Items)
+        {
+            if(index == skin.index)
+            {
+                skinPlayer.sprite = skin.img;
+            }
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

@@ -275,6 +275,8 @@ MonoBehaviour:
   timeMoveToNextblock: 0.03
   receivedCoins: 0
   receivedStars: 0
+  itemSkinSO: {fileID: 11400000, guid: cbaad5364e803e7458f3e15954710e72, type: 2}
+  skinPlayer: {fileID: 7982730166556567186}
 --- !u!61 &2241242055630968182
 BoxCollider2D:
   m_ObjectHideFlags: 0

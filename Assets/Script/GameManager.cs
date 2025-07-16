@@ -19,6 +19,16 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
+    [SerializeField] private int currentSkin;
+    public int CurrentSkin
+    {
+        get { return currentSkin; }
+        set
+        {
+            currentSkin = value;
+        }
+    }
+
     private int coins;
 
     public int Coins
@@ -50,6 +60,8 @@ public class GameManager : Singleton<GameManager>
             }
         }
     }
+
+
 
     //public int totalStars;
 
