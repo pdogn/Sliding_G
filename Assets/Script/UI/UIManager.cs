@@ -18,6 +18,8 @@ public class UIManager : Singleton<UIManager>
     public GameObject PauseMenu_canvas;
     public GameObject Setting_canvas;
 
+    public GameObject UI_Skin_canvas;
+
     //GameObject backgroundImg;
     // Start is called before the first frame update
     void Start()
@@ -111,5 +113,10 @@ public class UIManager : Singleton<UIManager>
         Pass_Fail_canvas.SetActive(true);
         Pass_Fail_canvas.GetComponent<Pass_Fail_UI_Canvas>().ShowFailLevelUI();
         GameManager.Instance.isPlayingTGamePlay = false;
+    }
+
+    public void DisPlaySkinCanvas()
+    {
+        UI_Skin_canvas.SetActive(true);
     }
 }

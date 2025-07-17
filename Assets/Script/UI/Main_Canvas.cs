@@ -7,6 +7,7 @@ public class Main_Canvas : MonoBehaviour
 {
     [Header("Main_canvas")]
     [SerializeField] Button Play_btn;
+    [SerializeField] Button SelectSkin_btn;
     [SerializeField] Button Setting;
     [SerializeField] Button Description;
     [SerializeField] Button Facebok;
@@ -21,6 +22,7 @@ public class Main_Canvas : MonoBehaviour
     private void Start()
     {
         Play_btn.onClick.AddListener(PlayGameBtn1);
+        SelectSkin_btn.onClick.AddListener(() => UIManager.Instance.DisPlaySkinCanvas());
         Setting.onClick.AddListener(() => GameEvent.ShowSettingPanel());
         Description.onClick.AddListener(DesBtn);
         Facebok.onClick.AddListener(FaebokBtn);

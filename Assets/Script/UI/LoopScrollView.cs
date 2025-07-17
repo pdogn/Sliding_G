@@ -59,7 +59,7 @@ public class LoopScrollView : MonoBehaviour
                 content.SetAsLastSibling();
 
                 //reload item
-                ItemSkinInfo itemInf = item.GetComponent<ItemSkinUI>().RetunItemInfo();
+                ItemSkinInfo itemInf = item.GetComponent<ItemSkinUI>().itemSkinInfo;
                 if (!itemSkins.Contains(itemInf))
                 {
                     itemSkins.AddLast(itemInf);
@@ -78,7 +78,7 @@ public class LoopScrollView : MonoBehaviour
                 content.SetAsFirstSibling();
 
                 //reload item
-                ItemSkinInfo itemInf = item.GetComponent<ItemSkinUI>().RetunItemInfo();
+                ItemSkinInfo itemInf = item.GetComponent<ItemSkinUI>().itemSkinInfo;
                 if (!itemSkins.Contains(itemInf))
                 {
                     itemSkins.AddFirst(itemInf);

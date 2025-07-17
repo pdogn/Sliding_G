@@ -12,12 +12,19 @@ public class ItemSkinUI : MonoBehaviour
     [SerializeField] public Button use_Btn;
     [SerializeField] public RectTransform lbl_using;
 
-    public bool isUsing;
+    //public bool isUsing;
 
-    //[SerializeField] UI_Skin_canvas uiSkinCanvas;
+    public ItemSkinInfo itemSkinInfo;
+
+    private void Start()
+    {
+        use_Btn.onClick.AddListener(Click);
+    }
 
     public void SetUpItem(ItemSkinInfo item)
     {
+        itemSkinInfo = item;
+
         skinImage.sprite = item.img;
         lbl_name.text = item.name;
         index = item.index;
@@ -34,12 +41,24 @@ public class ItemSkinUI : MonoBehaviour
         }
     }
 
-    public ItemSkinInfo RetunItemInfo()
+    void Click()
     {
-        ItemSkinInfo itemInf = new ItemSkinInfo();
-        itemInf.name = lbl_name.text;
-        itemInf.img = skinImage.sprite;
-        itemInf.index = this.index;
-        return itemInf;
+        GameManager.Instance.CurrentSkin = itemSkinInfo.index;
+
+        Transform content = this.gameObject.transform.parent;
+        foreach(Transform child in content)
+        {
+            ItemSkinUI item = child.GetComponent<ItemSkinUI>();
+            if (GameManager.Instance.CurrentSkin == item.index)
+            {
+                item.use_Btn.gameObject.SetActive(false);
+                item.lbl_using.gameObject.SetActive(true);
+            }
+            else
+            {
+                item.use_Btn.gameObject.SetActive(true);
+                item.lbl_using.gameObject.SetActive(false);
+            }
+        }
     }
 }

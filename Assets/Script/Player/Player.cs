@@ -158,7 +158,7 @@ public class Player : MonoBehaviour
 
     public void SetPlayer(Vector2 _target, Vector3 _position)
     {
-        SetSkin(/*GameManager.Instance.CurrentSkin*/10);
+        SetSkin(GameManager.Instance.CurrentSkin);
         target = _target;
         currentIndex = target;
         this.transform.position = _position;
@@ -214,6 +214,12 @@ public class Player : MonoBehaviour
             PlayerPrefs.SetInt("TotalCoins", GameManager.Instance.totalCoin);
 
             //this.gameObject.SetActive(false);
+        }
+
+        if (collision.CompareTag("trap"))
+        {
+            //GameEvent.DisPlayFail_LevelUI();
+            UIManager.Instance.ExecuteAcion(GameEvent.DisPlayFail_LevelUI);
         }
     }
 }

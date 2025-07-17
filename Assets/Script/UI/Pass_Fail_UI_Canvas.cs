@@ -11,6 +11,8 @@ public class Pass_Fail_UI_Canvas : MonoBehaviour
     public Button btn_RePlay;
     public Button btn_Next;
 
+    [SerializeField] GameObject img_win;
+    [SerializeField] GameObject img_fail;
     private void Start()
     {
         btn_Home.onClick.AddListener(() => 
@@ -35,11 +37,15 @@ public class Pass_Fail_UI_Canvas : MonoBehaviour
     {
         btn_Next.gameObject.SetActive(true);
         Lable.text = "Passed";
+        img_win.SetActive(true);
+        img_fail.SetActive(false);
     }
 
     public void ShowFailLevelUI()
     {
         btn_Next.gameObject.SetActive(false);
         Lable.text = "Fail";
+        img_win.SetActive(false);
+        img_fail.SetActive(true);
     }
 }
