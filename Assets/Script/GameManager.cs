@@ -14,7 +14,6 @@ public class GameManager : Singleton<GameManager>
             {
                 crrlevel = value;
                 //Stars = GetLevelStars(crrlevel);
-                //GameEvent.LevelChanged(crrlevel);
             }
         }
     }

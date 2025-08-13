@@ -8,12 +8,15 @@ public class Player : MonoBehaviour
     [SerializeField] Vector2 currentIndex;
     [SerializeField] Vector2 target;     //(rows, cols)
     [SerializeField] float timeMoveToNextblock = 0.1f;
+    private Tween moveTween;
     bool isMoving;
     public int receivedCoins;
     public int receivedStars;
 
     [SerializeField] ItemSkinSO itemSkinSO;
     [SerializeField] SpriteRenderer skinPlayer;
+    [Space]
+    [SerializeField] Transform effect;
 
     // Start is called before the first frame update
     void Start()
@@ -41,23 +44,23 @@ public class Player : MonoBehaviour
         if (direction == Vector2.right)
         {
             FindTarget(direction, target);
-            MoveToTarget(target, CaculateTimeToMove());
+            MoveToTarget(target);
         }
         else if (direction == Vector2.left)
         {
             FindTarget(direction, target);
-            MoveToTarget(target, CaculateTimeToMove());
+            MoveToTarget(target);
         }
         else if (direction == Vector2.up)
         {
             FindTarget(direction, target);
 
-            MoveToTarget(target, CaculateTimeToMove());
+            MoveToTarget(target);
         }
         else if (direction == Vector2.down)
         { 
             FindTarget(direction, target);
-            MoveToTarget(target, CaculateTimeToMove());
+            MoveToTarget(target);
         }
     }
 
@@ -78,7 +81,7 @@ public class Player : MonoBehaviour
             if (y + 1 < GridManager.Instance.GridSizeX && GridManager.Instance.allBlockObj[x, y+1] != null)
             {
                 int value = GridManager.Instance.grid[x, y + 1];
-                if (value == 0 || value == 2 || value == 3 || value == 5 || value == 6 || value == 7)
+                if (value == 0 || value == 2 || value == 3 || value == 4 || value == 5 || value == 6 || value == 7)
                 {
                     target = new Vector2(x, y + 1);
                     FindTarget(direction, new Vector2(x, y + 1));
@@ -90,7 +93,7 @@ public class Player : MonoBehaviour
             if (y - 1 >= 0 && GridManager.Instance.allBlockObj[x, y - 1] != null)
             {
                 int value = GridManager.Instance.grid[x, y - 1];
-                if (value == 0 || value == 2 || value == 3 || value == 5 || value == 6|| value == 5 || value == 7)
+                if (value == 0 || value == 2 || value == 3 || value == 4 || value == 5 || value == 6|| value == 5 || value == 7)
                 {
                     target = new Vector2(x, y - 1);
                     FindTarget(direction, new Vector2(x, y - 1));
@@ -102,7 +105,7 @@ public class Player : MonoBehaviour
             if (x + 1 < GridManager.Instance.GridSizeY && GridManager.Instance.allBlockObj[x+1, y] != null)
             {
                 int value = GridManager.Instance.grid[x + 1, y];
-                if (value == 0 || value == 2 || value == 3 || value == 5 || value == 6 || value == 7)
+                if (value == 0 || value == 2 || value == 3 || value == 4 || value == 5 || value == 6 || value == 7)
                 {
                     target = new Vector2(x + 1, y);
                     FindTarget(direction, new Vector2(x + 1, y));
@@ -114,7 +117,7 @@ public class Player : MonoBehaviour
             if (x - 1 >= 0 && GridManager.Instance.allBlockObj[x - 1, y] != null)
             {
                 int value = GridManager.Instance.grid[x - 1, y];
-                if (value == 0 || value == 2 || value == 3 || value == 5 || value == 6 || value == 7)
+                if (value == 0 || value == 2 || value == 3 || value == 4 || value == 5 || value == 6 || value == 7)
                 {
                     target = new Vector2(x - 1, y);
                     FindTarget(direction, new Vector2(x - 1, y));
@@ -141,15 +144,15 @@ public class Player : MonoBehaviour
         return _timeToMove;
     }
 
-    void MoveToTarget(Vector2 _targetIndex, float arriveTime)
+    void MoveToTarget(Vector2 _targetIndex)
     {
-        arriveTime = CaculateTimeToMove();
+        float arriveTime = CaculateTimeToMove();Debug.Log(moveTween + " kkk");
         Debug.Log("Dong: arriveTime: " + arriveTime);
 
         DOTween.Kill(transform);
         transform.DOKill();
         Transform targetObj = GridManager.Instance.allBlockObj[(int)_targetIndex.x, (int)_targetIndex.y].transform;
-        transform.DOMove(targetObj.position, arriveTime).SetEase(Ease.Linear).OnComplete(() =>
+        moveTween = transform.DOMove(targetObj.position, arriveTime).SetEase(Ease.Linear).OnComplete(() =>
         {
             isMoving = false;
             currentIndex = _targetIndex;
@@ -166,6 +169,10 @@ public class Player : MonoBehaviour
         //receivedStars = 0;
         GameManager.Instance.Coins = receivedCoins;
         //GameManager.Instance.Stars = receivedStars;
+        skinPlayer.gameObject.SetActive(true);
+        effect.gameObject.SetActive(false);
+
+        DOTween.Kill(transform);
     }
 
     public void SetSkin(int index)
@@ -219,6 +226,9 @@ public class Player : MonoBehaviour
         if (collision.CompareTag("trap"))
         {
             //GameEvent.DisPlayFail_LevelUI();
+            moveTween.Kill();
+            skinPlayer.gameObject.SetActive(false);
+            effect.gameObject.SetActive(true);
             UIManager.Instance.ExecuteAcion(GameEvent.DisPlayFail_LevelUI);
         }
     }

@@ -143,6 +143,7 @@ public class SelectLevel_Canvas : Singleton<SelectLevel_Canvas>
             GridManager.Instance.LoadLevel(levelId);
             UIManager.Instance.SetupBackground(-455f);
             UIManager.Instance.ShowIngameUI();
+            GameManager.Instance.Stars = GameManager.Instance.GetLevelStars(GameManager.Instance.CurrenLevel);
         });
         GameManager.Instance.isPlayingTGamePlay = true;
     }
