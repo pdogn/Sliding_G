@@ -13,7 +13,7 @@ public class GameManager : Singleton<GameManager>
             if(crrlevel != value)
             {
                 crrlevel = value;
-                //Stars = GetLevelStars(crrlevel);
+                Stars = GetLevelStars(crrlevel);
                 //GameEvent.LevelChanged(crrlevel);
             }
         }
